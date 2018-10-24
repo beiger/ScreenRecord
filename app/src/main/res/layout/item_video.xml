@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="videoInfo"
+            type="com.bing.example.model.entity.VideoInfo" />
+
+        <variable
+            name="selected"
+            type="Boolean"/>
+
+        <variable
+            name="mode"
+            type="Integer"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp">
+        <LinearLayout
+            android:id="@+id/backContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="4dp"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/thumb"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:img_url="@{videoInfo.imagePath}" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="@{videoInfo.title}"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/foreground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/selected_foreground"
+            android:visibility="@{mode == 0 ? View.GONE : View.VISIBLE}">
+
+            <com.bing.example.widget.SmoothCheckBox
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:clickable="false"
+                android:checked="@{selected}"
+                app:stroke_width="2dp"
+                app:color_checked="@color/accent"/>
+        </FrameLayout>
+
+    </FrameLayout>
+
+</layout>

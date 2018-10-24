@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="colorPrimary">#26b74e</color>
+	<color name="colorPrimaryDark">#00ffffff</color>
+	<color name="colorAccent">#26b74e</color>
+
+	<color name="color9">#ffffff</color>                <!--背景色/按钮字体-->
+	<color name="color10">#f8f8f8</color>        <!--状态导航栏背景色-->
+	<color name="color11">#f2f2f2</color>        <!--背景色-->
+	<color name="color12">#eeeeee</color>        <!--二级分割线-->
+	<color name="color13">#dddddd</color>        <!--分割线-->
+	<color name="color14">#999999</color>        <!--次文字/标题说明/时间 等-->
+	<color name="color15">#666666</color>        <!--次文字-->
+	<color name="color16">#333333</color>        <!--文字/导航/title1-->
+	<color name="color17">#00aaff</color>        <!--文字/标准蓝/文字高亮-->
+	<color name="color18">#ffab19</color>        <!--文字/标准橙/文字高亮-->
+	<color name="color19">#fb7e00</color>        <!--按钮/选择气泡/文字高亮-->
+	<color name="color20">#5ed125</color>        <!--文字/标准绿-->
+	<color name="color21">#ff4343</color>        <!--气泡提示文字/标准红-->
+	<color name="color22">#de1e7c</color>        <!--分类提示文字-->
+
+	<color name="bg_black_06">#06000000</color>
+	<color name="white">#ffffff</color>
+	<color name="selected_foreground">#1126b74e</color>
+</resources>

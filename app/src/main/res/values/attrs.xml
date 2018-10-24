@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NamedSpinner">
+        <attr name="android:name" format="string|reference" />
+        <attr name="android:textAppearance" format="reference" />
+        <attr name="android:entries" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SettingSelectView">
+        <attr name="optionsTitle" format="string" />
+        <attr name="optionsIcon" format="reference" />
+        <attr name="optionsEntry" format="reference"/>
+        <attr name="optionsDefault" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="SmoothCheckBox">
+        <attr name="duration" format="integer"/>
+        <attr name="stroke_width" format="dimension"/>
+        <attr name="color_tick" format="color"/>
+        <attr name="color_checked" format="color"/>
+        <attr name="color_unchecked" format="color"/>
+        <attr name="color_unchecked_stroke" format="color"/>
+    </declare-styleable>
+</resources>

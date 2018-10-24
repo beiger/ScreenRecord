@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">ScreenRecord</string>
+    <string name="title_home">Home</string>
+    <string name="title_videos">视频</string>
+    <string name="title_images">图片</string>
+    <string name="title_tools">工具箱</string>
+
+    <string name="config">配置</string>
+    <string name="vip">成为vip</string>
+
+    <string name="network_useless">网络异常，请点击重试</string>
+    <string name="no_data">没有数据</string>
+    <string name="refresh_at">更新于</string>
+    <string name="video_config">视频设置</string>
+    <string name="video_encoder">视频编码</string>
+    <string name="resolution">分辨率</string>
+    <string name="bitrate">码率(kbps)</string>
+    <string name="framerate">帧率(fps)</string>
+    <string name="iframe_interval">帧间隔</string>
+    <string name="avc_profile">AVC Profile</string>
+    <string name="orientation">方向</string>
+    <string name="audio_config">音频设置</string>
+    <string name="audio_codec">音频编码</string>
+    <string name="audio_channel_count">通道数</string>
+    <string name="sample_rate">采样率</string>
+    <string name="audio_bitrate">码率</string>
+    <string name="aac_profile">AAC Profile</string>
+    <string name="request_permission">将会使用麦克风录音，使用存储控件保存视频文件</string>
+    <string name="no_permission">没有权限</string>
+    <string name="no_options">没有参数选项</string>
+    <string name="default_option">(默认)</string>
+    <string name="enable_audio">开启音频</string>
+	<string name="settings">设置</string>
+	<string name="file_not_exits">文件不存在</string>
+    <string name="delete">删除</string>
+    <string name="select_all">全选</string>
+
+</resources>
