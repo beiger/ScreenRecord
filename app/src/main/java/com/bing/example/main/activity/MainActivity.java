@@ -30,6 +30,10 @@ import com.bing.example.module.screenRecord.Notifications;
 import com.bing.example.module.screenRecord.ScreenRecorder;
 import com.bing.example.module.screenRecord.VideoEncodeConfig;
 import com.bing.example.module.screenRecord.VideoEncodeConfigParcelable;
+import com.bing.example.otherdetails.AboutActivity;
+import com.bing.example.otherdetails.FeedbackActivity;
+import com.bing.example.otherdetails.ProblemActivity;
+import com.bing.example.otherdetails.RewardActivity;
 import com.bing.example.utils.BitmapUtil;
 import com.bing.example.utils.Constant;
 import com.bing.example.utils.UiUtil;
@@ -71,7 +75,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         private static final int REQUEST_PERMISSIONS = 2;
         private static final int REQUEST_SETTINGS = 2;
 
-        private CustomViewPager mViewPager;
         private VideoListFragment mVideoListFragment;
         private AppExecutors mAppExecutors;
         private MediaProjectionManager mMediaProjectionManager;
@@ -147,7 +150,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 			        .withFullscreen(true)
 			        .addDrawerItems(
 					        new PrimaryDrawerItem().withName(R.string.config).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(1),
-					        new PrimaryDrawerItem().withName(R.string.vip).withIcon(FontAwesome.Icon.faw_gamepad)
+					        new PrimaryDrawerItem().withName(R.string.problems).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(2),
+					        new PrimaryDrawerItem().withName(R.string.feedback).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(3),
+					        new PrimaryDrawerItem().withName(R.string.about).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(4),
+					        new PrimaryDrawerItem().withName(R.string.reward).withIcon(FontAwesome.Icon.faw_gamepad).withIdentifier(5)
 			        )
 			        .withSelectedItem(-1)
 			        .withOnDrawerItemClickListener((view, position, drawerItem) -> {
@@ -157,7 +163,19 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 				        if (drawerItem.getIdentifier() == 1) {
 					        Intent intent = new Intent(MainActivity.this, SettingActivity.class);
 					        startActivityForResult(intent, REQUEST_SETTINGS);
-				        }
+				        } else  if (drawerItem.getIdentifier() == 2) {
+                                                Intent intent = new Intent(MainActivity.this, ProblemActivity.class);
+                                                startActivityForResult(intent, REQUEST_SETTINGS);
+                                        } else  if (drawerItem.getIdentifier() == 3) {
+                                                Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
+                                                startActivityForResult(intent, REQUEST_SETTINGS);
+                                        } else  if (drawerItem.getIdentifier() == 4) {
+                                                Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+                                                startActivityForResult(intent, REQUEST_SETTINGS);
+                                        } else  if (drawerItem.getIdentifier() == 5) {
+                                                Intent intent = new Intent(MainActivity.this, RewardActivity.class);
+                                                startActivityForResult(intent, REQUEST_SETTINGS);
+                                        }
 				        return false;
 			        })
 			        .withSavedInstance(savedInstanceState)
@@ -204,13 +222,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         }
 
         void initViewPager() {
-                mViewPager = mBinding.viewPager;
-                mViewPager.setScanScroll(false);
+                CustomViewPager viewPager = mBinding.viewPager;
+                viewPager.setScanScroll(false);
                 mVideoListFragment = new VideoListFragment();
                 List<Fragment> fragments = new ArrayList<>();
                 fragments.add(mVideoListFragment);
                 BaseFragmentPagerAdapter fragmentPagerAdapter = new BaseFragmentPagerAdapter(getSupportFragmentManager(), fragments);
-                mViewPager.setAdapter(fragmentPagerAdapter);
+                viewPager.setAdapter(fragmentPagerAdapter);
         }
 
         @Override

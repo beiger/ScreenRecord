@@ -14,6 +14,7 @@
 		android:supportsRtl="true"
 		android:textAllCaps="false"
 		android:theme="@style/AppTheme">
+
 		<activity
 			android:name=".main.activity.MainActivity"
 			android:configChanges="orientation|screenSize|keyboardHidden"
@@ -28,6 +29,10 @@
 		<activity
 			android:name=".main.activity.SettingActivity"
 			android:screenOrientation="portrait" />
+		<activity android:name=".otherdetails.AboutActivity"/>
+		<activity android:name=".otherdetails.RewardActivity" />
+		<activity android:name=".otherdetails.FeedbackActivity" />
+		<activity android:name=".otherdetails.ProblemActivity" />
 
 		<provider
 			android:name="androidx.core.content.FileProvider"
