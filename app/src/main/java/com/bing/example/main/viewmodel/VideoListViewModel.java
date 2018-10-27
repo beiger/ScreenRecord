@@ -6,6 +6,7 @@ import com.bing.example.model.RepositoryManager;
 import com.bing.example.model.entity.VideoInfo;
 import com.bing.mvvmbase.base.BaseViewModel;
 import com.bing.mvvmbase.model.datawrapper.Status;
+import com.blankj.utilcode.util.FileUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -34,6 +35,20 @@ public class VideoListViewModel extends BaseViewModel {
         }
 
         public void deleteVideos(List<VideoInfo> infos) {
-                mAppExecutors.diskIO().execute(() -> RepositoryManager.instance().deleteVideo(infos));
+                mAppExecutors.diskIO().execute(() -> {
+                        RepositoryManager.instance().deleteVideo(infos);
+                        for (int i = 0; i < infos.size(); i++) {
+                                FileUtils.deleteFile(infos.get(i).getPath());
+                                FileUtils.deleteFile(infos.get(i).getImagePath());
+                        }
+                });
+        }
+
+        public void deleteVideo(VideoInfo info) {
+                mAppExecutors.diskIO().execute(() -> {
+                        RepositoryManager.instance().deleteVideo(info);
+                        FileUtils.deleteFile(info.getPath());
+                        FileUtils.deleteFile(info.getImagePath());
+                });
         }
 }

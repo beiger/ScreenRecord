@@ -11,6 +11,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 @Dao
 public interface VideoDao {
@@ -30,8 +31,14 @@ public interface VideoDao {
         void deleteAll();
 
         @Query("delete from videos where id=(:id)")
-        void deleteVideo(int id);
+        void deleteVideos(int id);
 
         @Delete
-        void deleteVideo(List<VideoInfo> videoInfos);
+        void deleteVideos(List<VideoInfo> videoInfos);
+
+        @Delete
+        void deleteVideo(VideoInfo videoInfo);
+
+        @Update
+        void updateVideo(VideoInfo videoInfo);
 }

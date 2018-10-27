@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+	<!--Context.getFilesDir().-->
+	<files-path path="data" name="data"/>
+	<!--Context.getFilesDir().-->
+	<files-path path="data" name="data"/>
+	<!--Context.getFilesDir().-->
+	<files-path path="data" name="data"/>
+	<!-- getCacheDir().-->
+	<cache-path name="data" path="data" />
+	<!-- Environment.getExternalStorageDirectory().-->
+	<external-path name="ScreenRecord" path="ScreenRecord" />
+	<!--Context#getExternalFilesDir(String) Context.getExternalFilesDir(null).   -->
+	<external-files-path name="data" path="data" />
+	<!-- Context.getExternalCacheDir().  -->
+	<external-cache-path name="data" path="data" />
+</paths>

@@ -62,23 +62,55 @@ public class VideosAdapter extends BaseRecycleViewAdapter<VideoInfo, VideoInfoHo
                         intoMutiSelectMode(position);
                         return true;
                 });
+                binding.rename.setOnLongClickListener(v -> {
+                        intoMutiSelectMode(position);
+                        return true;
+                });
+                binding.delete.setOnLongClickListener(v -> {
+                        intoMutiSelectMode(position);
+                        return true;
+                });
+                binding.share.setOnLongClickListener(v -> {
+                        intoMutiSelectMode(position);
+                        return true;
+                });
                 binding.thumb.setOnClickListener(v -> {
                         if (mListener != null) {
                                 mListener.onClickImage(position, mData.get(position));
                         }
                 });
+	        binding.rename.setOnClickListener(v -> {
+		        if (mListener != null) {
+			        mListener.onClickRename(position, mData.get(position));
+		        }
+	        });
+	        binding.delete.setOnClickListener(v -> {
+		        if (mListener != null) {
+			        mListener.onClickDelete(position, mData.get(position));
+		        }
+	        });
+	        binding.share.setOnClickListener(v -> {
+		        if (mListener != null) {
+			        mListener.onClickShare(position, mData.get(position));
+		        }
+	        });
                 binding.foreground.setOnClickListener(v -> {
-                        if (mSelectedPostions.contains(position)) {
-                                mSelectedPostions.remove(position);
-                                notifyItemChanged(position);
-                        } else {
-                                mSelectedPostions.add(position);
-                                notifyItemChanged(position);
-                        }
-                        if (mListener != null) {
-                                mListener.onClickFore(position, mSelectedPostions.size());
-                        }
+			onClickForeground(position);
                 });
+                binding.checkbox.setOnClickListener(v -> onClickForeground(position));
+        }
+
+        private void onClickForeground(int position) {
+	        if (mSelectedPostions.contains(position)) {
+		        mSelectedPostions.remove(position);
+		        notifyItemChanged(position);
+	        } else {
+		        mSelectedPostions.add(position);
+		        notifyItemChanged(position);
+	        }
+	        if (mListener != null) {
+		        mListener.onClickFore(position, mSelectedPostions.size());
+	        }
         }
 
         private void intoMutiSelectMode(int position) {
@@ -102,6 +134,8 @@ public class VideosAdapter extends BaseRecycleViewAdapter<VideoInfo, VideoInfoHo
 	public interface OnClickListener {
                 void onClickImage(int position, VideoInfo videoInfo);
                 void onClickRename(int position, VideoInfo videoInfo);
+                void onClickDelete(int position, VideoInfo videoInfo);
+                void onClickShare(int position, VideoInfo videoInfo);
                 void onClickFore(int position, int selectedNumber);
 	}
 

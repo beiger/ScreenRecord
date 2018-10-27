@@ -37,6 +37,14 @@ public class RepositoryManager {
         }
 
         public void deleteVideo(List<VideoInfo> videoInfos) {
-                mDatabase.videoDao().deleteVideo(videoInfos);
+                mDatabase.videoDao().deleteVideos(videoInfos);
+        }
+
+        public void deleteVideo(VideoInfo videoInfo) {
+                mDatabase.videoDao().deleteVideo(videoInfo);
+        }
+
+        public void updateVideo(VideoInfo videoInfo) {
+                mDatabase.videoDao().updateVideo(videoInfo);
         }
 }
