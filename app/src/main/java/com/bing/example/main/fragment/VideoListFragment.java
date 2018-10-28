@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import app.dinus.com.itemdecoration.GridDividerItemDecoration;
 import cn.jzvd.JzvdStd;
 
 import android.content.Intent;
@@ -26,7 +25,6 @@ import com.bing.mvvmbase.model.datawrapper.Status;
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.dinuscxj.itemdecoration.GridOffsetsItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
@@ -36,6 +34,7 @@ import java.io.File;
 import java.util.List;
 
 import static com.bing.example.main.adapter.VideosAdapter.MODE_NORMAL;
+import static com.bing.example.main.adapter.VideosAdapter.MODE_SELECT;
 
 public class VideoListFragment extends BaseRecycleViewFragment<FragmentVideoListBinding, VideoListViewModel, MainViewModel, VideosAdapter, VideoInfo>  {
 
@@ -210,5 +209,20 @@ public class VideoListFragment extends BaseRecycleViewFragment<FragmentVideoList
                         }
                 }
                 mAdapter.notifyDataSetChanged();
+        }
+
+        public boolean onBackPressed() {
+                if (mAdapter.getCurrentMode() == MODE_SELECT) {
+                        mAdapter.intoNormalMode();
+                        return true;
+                } else {
+                        return false;
+                }
+        }
+
+        public void intoNormalMode() {
+                if (mAdapter.getCurrentMode() == MODE_SELECT) {
+                        mAdapter.intoNormalMode();
+                }
         }
 }

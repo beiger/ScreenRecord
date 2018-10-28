@@ -32,6 +32,7 @@
 	<string name="enable_audio">开启音频</string>
 	<string name="settings">设置</string>
 	<string name="file_not_exits">文件不存在</string>
+
 	<string name="delete">删除</string>
 	<string name="select_all">全选</string>
 	<string name="rename">重命名</string>
@@ -43,5 +44,6 @@
 	<string name="problems">问题</string>
 	<string name="feedback">反馈</string>
 	<string name="about">关于</string>
+    <string name="record_stoped">录音结束</string>
 
 </resources>

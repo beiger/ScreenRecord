@@ -18,7 +18,6 @@ import com.bing.example.module.screenRecord.VideoEncodeConfigParcelable;
 import com.bing.example.utils.UiUtil;
 import com.bing.example.widget.SettingSelectView;
 import com.blankj.utilcode.util.ScreenUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.suke.widget.SwitchButton;
 
 import java.util.ArrayList;
@@ -431,15 +430,15 @@ public class SettingActivity extends AppCompatActivity {
                         PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor edit = preferences.edit();
                 for (SettingSelectView view : new SettingSelectView[]{
+                        mVideoCodec,
                         mVieoResolution,
+                        mVideoBitrate,
                         mVideoFramerate,
                         mIFrameInterval,
-                        mVideoBitrate,
-                        mAudioBitrate,
-                        mAudioSampleRate,
-                        mAudioChannelCount,
-                        mVideoCodec,
                         mAudioCodec,
+                        mAudioChannelCount,
+                        mAudioSampleRate,
+                        mAudioBitrate,
                         mAudioProfile,
                 }) {
                         saveSelectionToPreferences(edit, view);

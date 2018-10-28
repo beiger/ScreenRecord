@@ -3,21 +3,20 @@ package com.bing.example.main.viewmodel;
 import android.app.Application;
 
 import com.alibaba.fastjson.JSON;
-import com.bing.example.app.ScreenRecordApplication;
 import com.bing.example.module.screenRecord.AudioEncodeConfig;
 import com.bing.example.module.screenRecord.VideoEncodeConfig;
 import com.bing.example.module.screenRecord.VideoEncodeConfigParcelable;
 import com.bing.example.utils.Constant;
-import com.bing.mvvmbase.base.AppExecutors;
 import com.bing.mvvmbase.base.BaseViewModel;
 import com.blankj.utilcode.util.FileIOUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableBoolean;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 
 public class MainViewModel extends BaseViewModel {
-        private AppExecutors mAppExecutors;
         private MutableLiveData<VideoEncodeConfig> mVideoEncodeConfigLive = new MutableLiveData<>();
         private VideoEncodeConfig mVideoEncodeConfig;
         private MutableLiveData<AudioEncodeConfig> mAudioEncodeConfigLive = new MutableLiveData<>();
@@ -29,7 +28,6 @@ public class MainViewModel extends BaseViewModel {
 
         public MainViewModel(@NonNull Application application) {
                 super(application);
-                mAppExecutors = ((ScreenRecordApplication) application).getAppExecutors();
                 mAppExecutors.diskIO().execute(this::getConfigFromLocal);
         }
 
@@ -60,6 +58,12 @@ public class MainViewModel extends BaseViewModel {
                                 FileIOUtils.writeFileFromString(AUDIO_CONFIG_PATH, acString);
                         }
                 });
+        }
+
+        @Override
+        public void onDestroy(@NonNull LifecycleOwner owner) {
+                writeConfigToFile();
+                super.onDestroy(owner);
         }
 
         public VideoEncodeConfig getVideoEncodeConfig() {

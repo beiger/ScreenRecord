@@ -87,24 +87,48 @@ public class AudioEncodeConfig implements Parcelable {
                 return codecName;
         }
 
+        public void setCodecName(String codecName) {
+                this.codecName = codecName;
+        }
+
         public String getMimeType() {
                 return mimeType;
+        }
+
+        public void setMimeType(String mimeType) {
+                this.mimeType = mimeType;
         }
 
         public int getBitRate() {
                 return bitRate;
         }
 
+        public void setBitRate(int bitRate) {
+                this.bitRate = bitRate;
+        }
+
         public int getSampleRate() {
                 return sampleRate;
+        }
+
+        public void setSampleRate(int sampleRate) {
+                this.sampleRate = sampleRate;
         }
 
         public int getChannelCount() {
                 return channelCount;
         }
 
+        public void setChannelCount(int channelCount) {
+                this.channelCount = channelCount;
+        }
+
         public int getProfile() {
                 return profile;
+        }
+
+        public void setProfile(int profile) {
+                this.profile = profile;
         }
 
         MediaFormat toFormat() {

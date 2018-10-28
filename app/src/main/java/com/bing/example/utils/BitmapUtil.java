@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 
 import com.blankj.utilcode.util.FileUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -71,16 +72,14 @@ public class BitmapUtil {
 		return bitmap;
 	}
 
-	public static Bitmap createVideoThumbnailLocal(String filepath) {
+	public static Bitmap createVideoThumbnailLocal(String filepath, long time) {
 		Bitmap bitmap = null;
 		MediaMetadataRetriever retriever = new MediaMetadataRetriever();
 		try {
 			retriever.setDataSource(filepath);
-			bitmap = retriever.getFrameAtTime();
-		} catch (IllegalArgumentException ex) {
-			// Assume this is a corrupt video file
+			bitmap = retriever.getFrameAtTime(time);
 		} catch (RuntimeException ex) {
-			// Assume this is a corrupt video file.
+			LogUtils.e(ex.getMessage());
 		} finally {
 			try {
 				retriever.release();

@@ -1,6 +1,5 @@
 package com.bing.example.main.adapter;
 
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.bing.example.R;
@@ -36,6 +35,10 @@ public class VideosAdapter extends BaseRecycleViewAdapter<VideoInfo, VideoInfoHo
                         infos.add(mData.get(position));
                 }
                 return infos;
+        }
+
+        public int getCurrentMode() {
+                return mCurrentMode;
         }
 
         public VideosAdapter(OnClickListener listener, OnModeChangeListener modeChangeListener) {

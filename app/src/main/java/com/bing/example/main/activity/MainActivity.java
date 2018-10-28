@@ -1,8 +1,9 @@
 package com.bing.example.main.activity;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -56,6 +57,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -63,11 +65,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import cn.jzvd.Jzvd;
-
+import io.reactivex.Single;
 import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.os.Build.VERSION_CODES.M;
-import static com.bing.example.module.screenRecord.ScreenRecorder.VIDEO_AVC;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements View.OnClickListener{
         public static final String ACTION_STOP = "net.yrom.screenrecorder.action.STOP";
@@ -83,42 +84,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         private BroadcastReceiver mStopActionReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                        File file = new File(mRecorder.getSavedPath());
                         if (ACTION_STOP.equals(intent.getAction())) {
                                 stopRecorder();
                         }
-                        Toast.makeText(context, "Recorder stopped!\n Saved file " + file, Toast.LENGTH_LONG).show();
-                        StrictMode.VmPolicy vmPolicy = StrictMode.getVmPolicy();
-                        try {
-                                // disable detecting FileUriExposure on public file
-                                StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().build());
-                                viewResult(file);
-                                insertIntoDatabase(file);
-                        } finally {
-                                StrictMode.setVmPolicy(vmPolicy);
-                        }
-                }
-
-                private void viewResult(File file) {
-                        Intent view = new Intent(Intent.ACTION_VIEW);
-                        view.addCategory(Intent.CATEGORY_DEFAULT);
-                        view.setDataAndType(Uri.fromFile(file), VIDEO_AVC);
-                        view.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        try {
-                                startActivity(view);
-                        } catch (ActivityNotFoundException e) {
-                                // no activity can open this video
-                        }
-                }
-
-                private void insertIntoDatabase(final File file) {
-                        mAppExecutors.diskIO().execute(() -> {
-                                String imagePath = Constant.THUMB_DIR + file.getName();
-                                Bitmap bitmap = BitmapUtil.createVideoThumbnailLocal(file.getAbsolutePath());
-                                BitmapUtil.saveBitmap(bitmap, imagePath);
-                                VideoInfo videoInfo = new VideoInfo(0, file.getName(), file.getAbsolutePath(), imagePath);
-                                RepositoryManager.instance().insertVideo(videoInfo);
-                        });
                 }
         };
 
@@ -259,10 +227,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
         @Override
         protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-                if (requestCode == REQUEST_MEDIA_PROJECTION) {
-                        // NOTE: Should pass this result data into a Service to run ScreenRecorder.
-                        // The following codes are merely exemplary.
-
+                if (requestCode == REQUEST_MEDIA_PROJECTION && resultCode == RESULT_OK) {
                         MediaProjection mediaProjection = mMediaProjectionManager.getMediaProjection(resultCode, data);
                         if (mediaProjection == null) {
                                 return;
@@ -282,11 +247,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                                 return;
                         }
                         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.US);
-                        final File file = new File(dir, "Screen-" + format.format(new Date())
-                                + "-" + video.width + "x" + video.height + ".mp4");
+                        final File file = new File(dir, format.format(new Date()) + ".mp4");
                         mRecorder = newRecorder(mediaProjection, video, audio, file);
                         if (hasPermissions()) {
-                                startRecorder();
+                                moveTaskToBack(false);
+                                addDisposable(Single.timer(500, TimeUnit.MILLISECONDS).subscribe(aLong -> startRecorder()));
                         } else {
                                 cancelRecorder();
                         }
@@ -313,7 +278,18 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
                         @Override
                         public void onStop(Throwable error) {
-                                runOnUiThread(() -> stopRecorder());
+                                StrictMode.VmPolicy vmPolicy = StrictMode.getVmPolicy();
+                                File file = new File(mRecorder.getSavedPath());
+                                mRecorder = null;
+                                try {
+                                        // disable detecting FileUriExposure on public file
+                                        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().build());
+                                        insertIntoDatabase(file);
+                                        ActivityManager am = (ActivityManager) getSystemService(Activity.ACTIVITY_SERVICE);
+                                        am.moveTaskToFront(getTaskId(), 0);
+                                } finally {
+                                        StrictMode.setVmPolicy(vmPolicy);
+                                }
                                 if (error != null) {
                                         ToastUtils.showShort("Recorder error ! See logcat for more details");
                                         error.printStackTrace();
@@ -324,6 +300,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                                                 .setData(Uri.fromFile(output));
                                         sendBroadcast(intent);
                                 }
+                        }
+
+                        private void insertIntoDatabase(final File file) {
+                                mAppExecutors.diskIO().execute(() -> {
+                                        String imagePath = Constant.THUMB_DIR + file.getName();
+                                        Bitmap bitmap = BitmapUtil.createVideoThumbnailLocal(file.getAbsolutePath(), 0);
+                                        BitmapUtil.saveBitmap(bitmap, imagePath);
+                                        VideoInfo videoInfo = new VideoInfo(0, file.getName(), file.getAbsolutePath(), imagePath);
+                                        RepositoryManager.instance().insertVideo(videoInfo);
+                                });
                         }
 
                         @Override
@@ -363,6 +349,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 		if (Jzvd.backPress()) {
 			return;
 		}
+		if (mVideoListFragment.onBackPressed()) {
+		        return;
+                }
 		super.onBackPressed();
 	}
 	@Override
@@ -374,11 +363,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         @Override
         protected void onDestroy() {
                 super.onDestroy();
-                mViewModel.writeConfigToFile();
                 stopRecorder();
         }
 
         private void onButtonClick() {
+                mVideoListFragment.intoNormalMode();
                 if (mRecorder != null) {
                         stopRecorder();
                 } else if (hasPermissions()) {
@@ -394,7 +383,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 if (mRecorder == null) return;
                 mRecorder.start();
                 registerReceiver(mStopActionReceiver, new IntentFilter(ACTION_STOP));
-                moveTaskToBack(true);
         }
 
         private void stopRecorder() {
@@ -402,7 +390,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 if (mRecorder != null) {
                         mRecorder.quit();
                 }
-                mRecorder = null;
                 try {
                         unregisterReceiver(mStopActionReceiver);
                 } catch (Exception e) {
