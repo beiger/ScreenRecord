@@ -15,8 +15,8 @@ import com.bing.example.module.screenRecord.AudioEncodeConfig;
 import com.bing.example.module.screenRecord.ScreenRecordUtil;
 import com.bing.example.module.screenRecord.VideoEncodeConfig;
 import com.bing.example.module.screenRecord.VideoEncodeConfigParcelable;
-import com.bing.example.utils.UiUtil;
 import com.bing.example.widget.SettingSelectView;
+import com.bing.mvvmbase.utils.UiUtil;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.suke.widget.SwitchButton;
 

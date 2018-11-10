@@ -19,12 +19,12 @@
 		android:id="@+id/title"
 		android:layout_width="0dp"
 		android:layout_height="30dp"
-		android:layout_marginStart="16dp"
+		android:layout_marginStart="24dp"
 		android:gravity="center_vertical"
-		tools:text="@string/video_encoder"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toEndOf="@id/icon"
-		app:layout_constraintTop_toTopOf="parent" />
+		app:layout_constraintTop_toTopOf="parent"
+		tools:text="@string/video_encoder" />
 
 	<TextView
 		android:id="@+id/result"

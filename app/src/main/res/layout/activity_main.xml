@@ -1,45 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools">
-	<data>
-		<import type="android.view.View"/>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-		<variable
-			name="isNormalMode"
-			type="androidx.databinding.ObservableBoolean"/>
-	</data>
+    <data>
 
-	<androidx.constraintlayout.widget.ConstraintLayout
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:fitsSystemWindows="true"
-		tools:context=".main.activity.MainActivity">
+        <import type="android.view.View" />
 
-		<androidx.appcompat.widget.Toolbar
-			android:id="@+id/toolbar"
-			android:layout_width="match_parent"
-			android:layout_height="48dp"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent"
-			android:visibility="@{isNormalMode ? View.VISIBLE : View.GONE}"/>
+        <variable
+            name="isNormalMode"
+            type="androidx.databinding.ObservableBoolean" />
+    </data>
 
-		<androidx.constraintlayout.widget.ConstraintLayout
-			android:id="@+id/toolbar_multi"
-			android:layout_width="match_parent"
-			android:layout_height="48dp"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent"
-			android:visibility="@{!isNormalMode ? View.VISIBLE : View.GONE}">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context=".main.activity.MainActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:visibility="@{isNormalMode ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_logo" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/toolbar_multi"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:visibility="@{!isNormalMode ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
             <ImageView
                 android:id="@+id/back"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:background="?android:selectableItemBackground"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_arrow_back_black_24dp"
-                android:background="?android:selectableItemBackground" />
+                android:src="@drawable/ic_arrow_back_black_24dp" />
 
             <ImageView
                 android:id="@+id/delete"
@@ -63,29 +73,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-		</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-		<com.bing.mvvmbase.base.widget.CustomViewPager
-			android:id="@+id/viewPager"
-			android:layout_width="0dp"
-			android:layout_height="0dp"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent"
+        <com.bing.mvvmbase.base.widget.CustomViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="48dp"
-			tools:layout="@layout/fragment_video_list" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_video_list" />
 
-		<com.google.android.material.floatingactionbutton.FloatingActionButton
-			android:id="@+id/record"
-			android:layout_width="56dp"
-			android:layout_height="56dp"
-			android:layout_marginEnd="16dp"
-			android:layout_marginBottom="16dp"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"
-			android:src="@drawable/ic__video_white_24dp"
-			app:elevation="16dp"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/record"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic__video_white_24dp"
+            app:elevation="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-	</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

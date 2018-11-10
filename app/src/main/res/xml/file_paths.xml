@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
 	<!--Context.getFilesDir().-->
-	<files-path path="data" name="data"/>
-	<!--Context.getFilesDir().-->
-	<files-path path="data" name="data"/>
-	<!--Context.getFilesDir().-->
-	<files-path path="data" name="data"/>
+	<files-path path="info" name="info"/>
 	<!-- getCacheDir().-->
 	<cache-path name="data" path="data" />
 	<!-- Environment.getExternalStorageDirectory().-->

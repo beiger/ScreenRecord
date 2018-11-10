@@ -64,7 +64,7 @@
                         android:layout_height="50dp"
                         android:layout_marginTop="8dp"
                         app:optionsDefault="0"
-                        app:optionsIcon="@drawable/ic_image"
+                        app:optionsIcon="@drawable/ic_video_code"
                         app:optionsTitle="@string/video_encoder" />
 
                 <View
@@ -81,7 +81,7 @@
                         android:layout_marginTop="8dp"
                         app:optionsDefault="0"
                         app:optionsEntry="@array/video_resolutions"
-                        app:optionsIcon="@drawable/ic_image"
+                        app:optionsIcon="@drawable/ic_resolution"
                         app:optionsTitle="@string/resolution" />
 
                 <View
@@ -98,7 +98,7 @@
                         android:layout_marginTop="8dp"
                         app:optionsDefault="6"
                         app:optionsEntry="@array/video_bitrates"
-                        app:optionsIcon="@drawable/ic_image"
+                        app:optionsIcon="@drawable/ic_video_bitrate"
                         app:optionsTitle="@string/bitrate" />
 
                 <View
@@ -115,7 +115,7 @@
                         android:layout_marginTop="8dp"
                         app:optionsDefault="1"
                         app:optionsEntry="@array/video_framerates"
-                        app:optionsIcon="@drawable/ic_image"
+                        app:optionsIcon="@drawable/ic_framrate"
                         app:optionsTitle="@string/framerate" />
 
                 <View
@@ -132,7 +132,7 @@
                         android:layout_marginTop="8dp"
                         app:optionsDefault="0"
                         app:optionsEntry="@array/iframeintervals"
-                        app:optionsIcon="@drawable/ic_image"
+                        app:optionsIcon="@drawable/ic_framrate_interval"
                         app:optionsTitle="@string/iframe_interval" />
 
                 <View
@@ -148,7 +148,7 @@
                         android:layout_height="50dp"
                         android:layout_marginTop="8dp"
                         app:optionsDefault="0"
-                        app:optionsIcon="@drawable/ic_image"
+                        app:optionsIcon="@drawable/ic_setting"
                         app:optionsTitle="@string/avc_profile" />
 
                 <View
@@ -165,7 +165,7 @@
                         android:layout_marginTop="8dp"
                         app:optionsDefault="0"
                         app:optionsEntry="@array/orientations"
-                        app:optionsIcon="@drawable/ic_image"
+                        app:optionsIcon="@drawable/ic_screen_rotation"
                         app:optionsTitle="@string/orientation" />
 
                 <View
@@ -192,7 +192,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_image"
+                            android:src="@drawable/ic_audio"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -232,7 +232,7 @@
                         android:layout_height="50dp"
                         android:layout_marginTop="8dp"
                         app:optionsDefault="0"
-                        app:optionsIcon="@drawable/ic_image"
+                        app:optionsIcon="@drawable/ic_audio_code"
                         app:optionsTitle="@string/audio_codec" />
 
                 <View
@@ -249,7 +249,7 @@
                         android:layout_marginTop="8dp"
                         app:optionsDefault="1"
                         app:optionsEntry="@array/audio_channels"
-                        app:optionsIcon="@drawable/ic_image"
+                        app:optionsIcon="@drawable/ic_channel"
                         app:optionsTitle="@string/audio_channel_count" />
 
                 <View
@@ -265,7 +265,7 @@
                         android:layout_height="50dp"
                         android:layout_marginTop="8dp"
                         app:optionsDefault="7"
-                        app:optionsIcon="@drawable/ic_image"
+                        app:optionsIcon="@drawable/ic_audio_sample"
                         app:optionsTitle="@string/sample_rate" />
 
                 <View
@@ -281,7 +281,7 @@
                         android:layout_height="50dp"
                         android:layout_marginTop="8dp"
                         app:optionsDefault="2"
-                        app:optionsIcon="@drawable/ic_image"
+                        app:optionsIcon="@drawable/ic_video_bitrate"
                         app:optionsTitle="@string/audio_bitrate" />
 
                 <View
@@ -297,7 +297,7 @@
                         android:layout_height="50dp"
                         android:layout_marginTop="8dp"
                         app:optionsDefault="0"
-                        app:optionsIcon="@drawable/ic_image"
+                        app:optionsIcon="@drawable/ic_setting"
                         app:optionsTitle="@string/aac_profile" />
 
             </LinearLayout>

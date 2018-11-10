@@ -46,4 +46,26 @@
 	<string name="about">关于</string>
     <string name="record_stoped">录音结束</string>
 
+
+	<string name="your_input">Write your feedback</string>
+	<string name="select_image">+ Add Screenshot</string>
+	<string name="send_feedback">Send</string>
+	<string name="send_feedback_two">Send Feedback</string>
+
+	<string name="info_fedback_legal_start">"Your "</string>
+	<string name="info_fedback_legal_system_info">"system info "</string>
+	<string name="info_fedback_legal_and">"and "</string>
+	<string name="info_fedback_legal_log_data">"log data "</string>
+	<string name="info_fedback_legal_will_be_sent">will be sent to %s</string>
+	<string name="select_picture_title">Select Picture</string>
+	<string name="click_again">Click again to change the image</string>
+	<string name="feedback_mail_subject">feedback about %1$s</string>
+	<string name="please_write">Please write something.</string>
+
+	<string name="need_permisson">此功能需要以下权限：</string>
+	<string name="open_permission">去开启</string>
+
+	<string name="help_developer">帮助开发者</string>
+	<string name="reward_reason">本开发团队致力于开发无广告、无推送、纯净的录屏应用。\n无任何盈利的应用很难开发维护下去，</string>
+
 </resources>

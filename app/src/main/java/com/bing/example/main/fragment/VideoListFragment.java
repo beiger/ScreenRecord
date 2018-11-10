@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import app.dinus.com.itemdecoration.GridOffsetsItemDecoration;
 import cn.jzvd.JzvdStd;
 
 import android.content.Intent;
@@ -120,8 +121,7 @@ public class VideoListFragment extends BaseRecycleViewFragment<FragmentVideoList
                         public void onClickRename(int position, VideoInfo videoInfo) {
                                 new LovelyTextInputDialog(getContext())
                                                 .setTopColorRes(R.color.color18)
-                                                .setTitle(R.string.rename)
-                                                .setMessage(R.string.please_input_filename)
+                                                .setMessage(R.string.rename)
                                                 .setIcon(R.drawable.ic_edit_black_24dp)
                                                 .setConfirmButton(android.R.string.ok, text -> {
                                                         videoInfo.setTitle(text);
@@ -136,7 +136,6 @@ public class VideoListFragment extends BaseRecycleViewFragment<FragmentVideoList
                                                 .setTopColorRes(R.color.color21)
                                                 .setButtonsColorRes(R.color.color22)
                                                 .setIcon(R.drawable.ic_delete_black_24dp)
-                                                .setTitle(R.string.delete)
                                                 .setMessage(R.string.sure_delete)
                                                 .setPositiveButton(android.R.string.ok, v ->{
                                                         mViewModel.deleteVideo(videoInfo);

@@ -34,14 +34,13 @@ import com.bing.example.module.screenRecord.VideoEncodeConfigParcelable;
 import com.bing.example.otherdetails.AboutActivity;
 import com.bing.example.otherdetails.FeedbackActivity;
 import com.bing.example.otherdetails.ProblemActivity;
-import com.bing.example.otherdetails.RewardActivity;
 import com.bing.example.utils.BitmapUtil;
 import com.bing.example.utils.Constant;
-import com.bing.example.utils.UiUtil;
 import com.bing.mvvmbase.base.AppExecutors;
 import com.bing.mvvmbase.base.BaseActivity;
 import com.bing.mvvmbase.base.viewpager.BaseFragmentPagerAdapter;
 import com.bing.mvvmbase.base.widget.CustomViewPager;
+import com.bing.mvvmbase.utils.UiUtil;
 import com.blankj.utilcode.util.ToastUtils;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -117,11 +116,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 			        .withToolbar(toolbar)
 			        .withFullscreen(true)
 			        .addDrawerItems(
-					        new PrimaryDrawerItem().withName(R.string.config).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(1),
-					        new PrimaryDrawerItem().withName(R.string.problems).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(2),
-					        new PrimaryDrawerItem().withName(R.string.feedback).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(3),
-					        new PrimaryDrawerItem().withName(R.string.about).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(4),
-					        new PrimaryDrawerItem().withName(R.string.reward).withIcon(FontAwesome.Icon.faw_gamepad).withIdentifier(5)
+					        new PrimaryDrawerItem().withName(R.string.config).withIcon(R.drawable.ic_setting).withIdentifier(1),
+					        new PrimaryDrawerItem().withName(R.string.problems).withIcon(R.drawable.ic_question).withIdentifier(2),
+					        new PrimaryDrawerItem().withName(R.string.feedback).withIcon(R.drawable.ic_feedback).withIdentifier(3),
+					        new PrimaryDrawerItem().withName(R.string.about).withIcon(R.drawable.ic_about).withIdentifier(4)
 			        )
 			        .withSelectedItem(-1)
 			        .withOnDrawerItemClickListener((view, position, drawerItem) -> {
@@ -139,9 +137,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                                                 startActivityForResult(intent, REQUEST_SETTINGS);
                                         } else  if (drawerItem.getIdentifier() == 4) {
                                                 Intent intent = new Intent(MainActivity.this, AboutActivity.class);
-                                                startActivityForResult(intent, REQUEST_SETTINGS);
-                                        } else  if (drawerItem.getIdentifier() == 5) {
-                                                Intent intent = new Intent(MainActivity.this, RewardActivity.class);
                                                 startActivityForResult(intent, REQUEST_SETTINGS);
                                         }
 				        return false;
