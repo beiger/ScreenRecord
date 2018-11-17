@@ -54,4 +54,9 @@ public class VideoInfo {
         public void setImagePath(String imagePath) {
                 this.imagePath = imagePath;
         }
+
+        @Override
+        public boolean equals(Object obj) {
+                return id == ((VideoInfo)obj).id;
+        }
 }

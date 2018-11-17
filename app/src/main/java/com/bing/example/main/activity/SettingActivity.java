@@ -49,7 +49,7 @@ public class SettingActivity extends AppCompatActivity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
-                UiUtil.setBarColorAndFontBlack(this, Color.TRANSPARENT, 0);
+                UiUtil.setBarColorAndFontBlack(this, Color.TRANSPARENT);
                 setContentView(R.layout.activity_setting);
                 bindViews();
 

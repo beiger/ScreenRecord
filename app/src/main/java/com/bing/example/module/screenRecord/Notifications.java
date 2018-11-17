@@ -27,8 +27,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.SystemClock;
 import android.text.format.DateUtils;
+import android.widget.RemoteViews;
 
 import com.bing.example.R;
+import com.bing.example.app.ScreenRecordApplication;
+import com.blankj.utilcode.util.LogUtils;
 
 import static android.os.Build.VERSION_CODES.O;
 import static com.bing.example.main.activity.MainActivity.ACTION_STOP;
@@ -43,9 +46,11 @@ public class Notifications extends ContextWrapper {
         private static final String CHANNEL_NAME = "Screen Recorder Notifications";
 
         private long mLastFiredTime = 0;
+        private String mTime;
         private NotificationManager mManager;
         private Notification.Action mStopAction;
         private Notification.Builder mBuilder;
+        private RemoteViews mRemoteViews;
 
         public Notifications(Context context) {
                 super(context);
@@ -58,9 +63,13 @@ public class Notifications extends ContextWrapper {
                 if (SystemClock.elapsedRealtime() - mLastFiredTime < 1000) {
                         return;
                 }
-                Notification notification = getBuilder()
-                        .setContentText("Length: " + DateUtils.formatElapsedTime(timeMs / 1000))
-                        .build();
+                mTime = DateUtils.formatElapsedTime(timeMs / 1000);
+                if (mRemoteViews == null || timeMs == 0) {
+                        mRemoteViews = createContentView();
+                }
+                mRemoteViews.setTextViewText(R.id.time, mTime);
+                LogUtils.i("recording:" + mTime);
+                Notification notification = getBuilder().build();
                 getNotificationManager().notify(id, notification);
                 mLastFiredTime = SystemClock.elapsedRealtime();
         }
@@ -74,6 +83,7 @@ public class Notifications extends ContextWrapper {
                                 .setOnlyAlertOnce(true)
                                 .addAction(stopAction())
                                 .setWhen(System.currentTimeMillis())
+                                .setContent(mRemoteViews)
                                 .setSmallIcon(R.drawable.ic_stat_recording);
                         if (Build.VERSION.SDK_INT >= O) {
                                 builder.setChannelId(CHANNEL_ID)
@@ -100,6 +110,26 @@ public class Notifications extends ContextWrapper {
                         mStopAction = new Notification.Action(android.R.drawable.ic_media_pause, "Stop", pendingIntent);
                 }
                 return mStopAction;
+        }
+
+        private RemoteViews createContentView() {
+                final RemoteViews view = new RemoteViews(ScreenRecordApplication.getContext().getPackageName(), R.layout.layout_notification);
+                setCommonView(view);
+                setCommonClickPending(view);
+                return view;
+        }
+
+        // 图片，歌名，艺术家，播放按钮，下一曲按钮，关闭按钮
+        private void setCommonView(RemoteViews view) {
+                view.setTextViewText(R.id.time, mTime);
+        }
+
+        // 播放或暂停，下一曲，关闭
+        private void setCommonClickPending(RemoteViews view) {
+                Intent intent = new Intent(ACTION_STOP).setPackage(getPackageName());
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1,
+                        intent, PendingIntent.FLAG_ONE_SHOT);
+                view.setOnClickPendingIntent(R.id.stop, pendingIntent);
         }
 
         public void clear() {

@@ -33,7 +33,6 @@ import com.bing.example.module.screenRecord.VideoEncodeConfig;
 import com.bing.example.module.screenRecord.VideoEncodeConfigParcelable;
 import com.bing.example.otherdetails.AboutActivity;
 import com.bing.example.otherdetails.FeedbackActivity;
-import com.bing.example.otherdetails.ProblemActivity;
 import com.bing.example.utils.BitmapUtil;
 import com.bing.example.utils.Constant;
 import com.bing.mvvmbase.base.AppExecutors;
@@ -41,8 +40,8 @@ import com.bing.mvvmbase.base.BaseActivity;
 import com.bing.mvvmbase.base.viewpager.BaseFragmentPagerAdapter;
 import com.bing.mvvmbase.base.widget.CustomViewPager;
 import com.bing.mvvmbase.utils.UiUtil;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -117,7 +116,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 			        .withFullscreen(true)
 			        .addDrawerItems(
 					        new PrimaryDrawerItem().withName(R.string.config).withIcon(R.drawable.ic_setting).withIdentifier(1),
-					        new PrimaryDrawerItem().withName(R.string.problems).withIcon(R.drawable.ic_question).withIdentifier(2),
 					        new PrimaryDrawerItem().withName(R.string.feedback).withIcon(R.drawable.ic_feedback).withIdentifier(3),
 					        new PrimaryDrawerItem().withName(R.string.about).withIcon(R.drawable.ic_about).withIdentifier(4)
 			        )
@@ -129,10 +127,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 				        if (drawerItem.getIdentifier() == 1) {
 					        Intent intent = new Intent(MainActivity.this, SettingActivity.class);
 					        startActivityForResult(intent, REQUEST_SETTINGS);
-				        } else  if (drawerItem.getIdentifier() == 2) {
-                                                Intent intent = new Intent(MainActivity.this, ProblemActivity.class);
-                                                startActivityForResult(intent, REQUEST_SETTINGS);
-                                        } else  if (drawerItem.getIdentifier() == 3) {
+				        } else  if (drawerItem.getIdentifier() == 3) {
                                                 Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
                                                 startActivityForResult(intent, REQUEST_SETTINGS);
                                         } else  if (drawerItem.getIdentifier() == 4) {
@@ -147,7 +142,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
         @Override
         protected void onCreateFirst() {
-                UiUtil.setBarColorAndFontBlack(this, Color.TRANSPARENT, 0);
+                UiUtil.setBarColorAndFontBlack(this, Color.TRANSPARENT);
         }
 
         @Override
@@ -246,7 +241,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                         mRecorder = newRecorder(mediaProjection, video, audio, file);
                         if (hasPermissions()) {
                                 moveTaskToBack(false);
-                                addDisposable(Single.timer(500, TimeUnit.MILLISECONDS).subscribe(aLong -> startRecorder()));
+                                addDisposable(Single.timer(300, TimeUnit.MILLISECONDS).subscribe(aLong -> startRecorder()));
                         } else {
                                 cancelRecorder();
                         }
@@ -318,6 +313,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                                         startTime = presentationTimeUs;
                                 }
                                 long time = (presentationTimeUs - startTime) / 1000;
+                                LogUtils.i(time + "");
                                 mNotifications.recording(time);
                         }
                 });

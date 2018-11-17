@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<color name="colorPrimary">#26b74e</color>
-	<color name="colorPrimaryDark">#00ffffff</color>
+	<color name="colorPrimaryDark">#00000000</color>
 	<color name="colorAccent">#26b74e</color>
 
 	<color name="color9">#ffffff</color>                <!--背景色/按钮字体-->

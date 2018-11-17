@@ -54,7 +54,7 @@ public class FeedbackActivity extends BaseActivity<ActivityFeedbackBinding, Base
 
         @Override
         protected void onCreateFirst() {
-                UiUtil.setBarColorAndFontBlack(this, Color.WHITE, 0);
+                UiUtil.setBarColorAndFontBlack(this, Color.TRANSPARENT);
         }
 
         @Override
