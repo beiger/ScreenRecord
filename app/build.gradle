@@ -35,7 +35,11 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+<<<<<<< HEAD
     implementation 'com.github.beiger:MVVMBase:0.14'
+=======
+    implementation 'com.github.beiger:MVVMBase:0.15'
+>>>>>>> 1 fix bugs
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'com.google.android.material:material:1.0.0'

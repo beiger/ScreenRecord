@@ -1,0 +1,63 @@
+<resources>
+	<string name="app_name">屏幕录制助手</string>
+
+	<string name="config">配置</string>
+	<string name="network_useless">网络异常，请点击重试</string>
+	<string name="no_data">没有数据</string>
+	<string name="refresh_at">更新于</string>
+	<string name="video_config">视频设置</string>
+	<string name="video_encoder">视频编码</string>
+	<string name="resolution">分辨率</string>
+	<string name="bitrate">码率(kbps)</string>
+	<string name="framerate">帧率(fps)</string>
+	<string name="iframe_interval">帧间隔</string>
+	<string name="avc_profile">AVC Profile</string>
+	<string name="orientation">方向</string>
+	<string name="audio_config">音频设置</string>
+	<string name="audio_codec">音频编码</string>
+	<string name="audio_channel_count">通道数</string>
+	<string name="sample_rate">采样率</string>
+	<string name="audio_bitrate">码率</string>
+	<string name="aac_profile">AAC Profile</string>
+	<string name="request_permission">将会使用麦克风录音，使用存储控件保存视频文件</string>
+	<string name="no_permission">没有权限</string>
+	<string name="no_options">没有参数选项</string>
+	<string name="default_option">(默认)</string>
+	<string name="enable_audio">开启音频</string>
+	<string name="settings">设置</string>
+	<string name="file_not_exits">文件不存在</string>
+
+	<string name="delete">删除</string>
+	<string name="select_all">全选</string>
+	<string name="rename">重命名</string>
+	<string name="please_input_filename">请输入新名称</string>
+	<string name="rename_failed">重命名失败</string>
+	<string name="sure_delete">确定要删除吗</string>
+	<string name="share_to">分享到</string>
+	<string name="feedback">反馈</string>
+	<string name="about">关于</string>
+
+	<string name="your_input">写下您的反馈</string>
+	<string name="select_image">+ 添加图片</string>
+	<string name="send_feedback">发送</string>
+	<string name="send_feedback_two">发送反馈</string>
+
+	<string name="info_fedback_legal_start">"您的 "</string>
+	<string name="info_fedback_legal_system_info">"系统信息 "</string>
+	<string name="info_fedback_legal_and">"和 "</string>
+	<string name="info_fedback_legal_log_data">"日志信息 "</string>
+	<string name="info_fedback_legal_will_be_sent">将会被发送到 %s</string>
+	<string name="select_picture_title">选择图片</string>
+	<string name="click_again">再点击一次切换图片</string>
+	<string name="feedback_mail_subject">关于 %1$s 的反馈</string>
+	<string name="please_write">请输入.</string>
+
+	<string name="need_permisson">此功能需要以下权限：</string>
+	<string name="open_permission">去开启</string>
+
+	<string name="help_developer">帮助开发者</string>
+	<string name="reward_reason">本开发团队致力于开发无广告、无推送、纯净的录屏应用。\n无任何盈利的应用很难开发维护下去，</string>
+
+	<string name="about_us">关于我们</string>
+	<string name="app_description">欢迎您使用屏幕录制助手。\n如有任何意见或建议，请在反馈页面告知我们，我们将及时处理并给您答复。\n感谢您的支持！</string>
+</resources>

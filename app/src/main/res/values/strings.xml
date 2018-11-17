@@ -1,51 +1,42 @@
 <resources>
 	<string name="app_name">ScreenRecord</string>
-	<string name="title_home">Home</string>
-	<string name="title_videos">视频</string>
-	<string name="title_images">图片</string>
-	<string name="title_tools">工具箱</string>
 
-	<string name="config">配置</string>
-	<string name="vip">成为vip</string>
+	<string name="config">Configure</string>
 
-	<string name="network_useless">网络异常，请点击重试</string>
-	<string name="no_data">没有数据</string>
-	<string name="refresh_at">更新于</string>
-	<string name="video_config">视频设置</string>
-	<string name="video_encoder">视频编码</string>
-	<string name="resolution">分辨率</string>
-	<string name="bitrate">码率(kbps)</string>
-	<string name="framerate">帧率(fps)</string>
-	<string name="iframe_interval">帧间隔</string>
+	<string name="network_useless">Network error, please retry.</string>
+	<string name="no_data">No data</string>
+	<string name="refresh_at">Updated at</string>
+	<string name="video_config">Video settings</string>
+	<string name="video_encoder">Video coding</string>
+	<string name="resolution">Resolution</string>
+	<string name="bitrate">Bit rate码率(kbps)</string>
+	<string name="framerate">Frame rate(fps)</string>
+	<string name="iframe_interval">Frame interval</string>
 	<string name="avc_profile">AVC Profile</string>
-	<string name="orientation">方向</string>
-	<string name="audio_config">音频设置</string>
-	<string name="audio_codec">音频编码</string>
-	<string name="audio_channel_count">通道数</string>
-	<string name="sample_rate">采样率</string>
-	<string name="audio_bitrate">码率</string>
+	<string name="orientation">orientation</string>
+	<string name="audio_config">Audio settings</string>
+	<string name="audio_codec">Audio coding</string>
+	<string name="audio_channel_count">channels</string>
+	<string name="sample_rate">Sample rate</string>
+	<string name="audio_bitrate">Bit rate</string>
 	<string name="aac_profile">AAC Profile</string>
-	<string name="request_permission">将会使用麦克风录音，使用存储控件保存视频文件</string>
-	<string name="no_permission">没有权限</string>
-	<string name="no_options">没有参数选项</string>
-	<string name="default_option">(默认)</string>
-	<string name="enable_audio">开启音频</string>
-	<string name="settings">设置</string>
-	<string name="file_not_exits">文件不存在</string>
+	<string name="request_permission">The microphone recording will be used, and the video file will be saved with the storage control.</string>
+	<string name="no_permission">No permission</string>
+	<string name="no_options">no options</string>
+	<string name="default_option">(default)</string>
+	<string name="enable_audio">Audio enabled</string>
+	<string name="settings">setting</string>
+	<string name="file_not_exits">File not exist</string>
 
-	<string name="delete">删除</string>
-	<string name="select_all">全选</string>
-	<string name="rename">重命名</string>
-	<string name="please_input_filename">请输入新名称</string>
-	<string name="rename_failed">重命名失败</string>
-	<string name="sure_delete">确定要删除吗</string>
-	<string name="share_to">分享到</string>
-	<string name="reward">打赏</string>
-	<string name="problems">问题</string>
-	<string name="feedback">反馈</string>
-	<string name="about">关于</string>
-    <string name="record_stoped">录音结束</string>
-
+	<string name="delete">Delete</string>
+	<string name="select_all">All</string>
+	<string name="rename">Rename</string>
+	<string name="please_input_filename">Please input a new name.</string>
+	<string name="rename_failed">Rename failed</string>
+	<string name="sure_delete">Are you sure to delete?</string>
+	<string name="share_to">Share</string>
+	<string name="feedback">Feedback</string>
+	<string name="about">About</string>
 
 	<string name="your_input">Write your feedback</string>
 	<string name="select_image">+ Add Screenshot</string>
@@ -62,11 +53,16 @@
 	<string name="feedback_mail_subject">feedback about %1$s</string>
 	<string name="please_write">Please write something.</string>
 
-	<string name="need_permisson">此功能需要以下权限：</string>
-	<string name="open_permission">去开启</string>
+	<string name="need_permisson">This function needs the following permissions: </string>
+	<string name="open_permission">Open</string>
 
-	<string name="help_developer">帮助开发者</string>
+	<string name="help_developer">Help developers</string>
 	<string name="reward_reason">本开发团队致力于开发无广告、无推送、纯净的录屏应用。\n无任何盈利的应用很难开发维护下去，</string>
 
+<<<<<<< HEAD
 	<string name="about_us">关于我们</string>
+=======
+	<string name="about_us">About us</string>
+	<string name="app_description">Welcome to use ScreenRecord. \n If you have any comments or suggestions, please let us know on the feedback page. We will deal with them in time and give you a reply. \n Thank you for your support!</string>
+>>>>>>> 1 fix bugs
 </resources>

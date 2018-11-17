@@ -1,11 +1,13 @@
 package com.bing.example.model.entity;
 
+import com.bing.mvvmbase.base.IsSame;
+
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "videos")
-public class VideoInfo {
+public class VideoInfo implements IsSame {
 
         @PrimaryKey(autoGenerate = true)
         private int id;
@@ -56,7 +58,26 @@ public class VideoInfo {
         }
 
         @Override
+<<<<<<< HEAD
         public boolean equals(Object obj) {
                 return id == ((VideoInfo)obj).id;
+=======
+        public boolean itemSame(IsSame isSame) {
+                return id == ((VideoInfo)isSame).id;
+        }
+
+        @Override
+        public boolean contentSame(IsSame isSame) {
+                VideoInfo info = (VideoInfo)isSame;
+                return id == info.id
+                                && title.equals(info.title)
+                                && path.equals(info.path)
+                                && imagePath.equals(info.imagePath);
+        }
+
+        @Override
+        public VideoInfo clone() {
+                return new VideoInfo(id, title, path, imagePath);
+>>>>>>> 1 fix bugs
         }
 }

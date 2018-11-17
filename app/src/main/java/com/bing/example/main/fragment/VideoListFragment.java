@@ -124,8 +124,9 @@ public class VideoListFragment extends BaseRecycleViewFragment<FragmentVideoList
                                                 .setMessage(R.string.rename)
                                                 .setIcon(R.drawable.ic_edit_black_24dp)
                                                 .setConfirmButton(android.R.string.ok, text -> {
-                                                        videoInfo.setTitle(text);
-                                                        RepositoryManager.instance().updateVideo(videoInfo);
+                                                        VideoInfo videoInfo1 = videoInfo.clone();
+                                                        videoInfo1.setTitle(text);
+                                                        RepositoryManager.instance().updateVideo(videoInfo1);
                                                 })
                                                 .show();
                         }

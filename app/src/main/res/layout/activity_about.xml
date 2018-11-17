@@ -40,7 +40,11 @@
 				android:layout_width="match_parent"
 				android:layout_height="?attr/actionBarSize"
 				android:background="@android:color/transparent"
+<<<<<<< HEAD
 				app:title="飞机"
+=======
+				app:title="@string/about_us"
+>>>>>>> 1 fix bugs
 				app:navigationIcon="?attr/homeAsUpIndicator"
 				app:layout_collapseMode="pin" />
 
@@ -66,10 +70,21 @@
 			android:id="@+id/scrollView"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
+<<<<<<< HEAD
 			android:paddingTop="25dp"
 			android:clipToPadding="false"
 			android:background="@android:color/holo_green_dark"
 			android:overScrollMode="never"/>
+=======
+			android:paddingTop="45dp"
+			android:clipToPadding="false"
+			android:overScrollMode="never"
+			android:background="@color/white">
+			<TextView
+				style="@style/TvTaskDetailContent"
+				android:text="@string/app_description"/>
+		</androidx.core.widget.NestedScrollView>
+>>>>>>> 1 fix bugs
 	</com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 	<com.google.android.material.floatingactionbutton.FloatingActionButton

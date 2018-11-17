@@ -54,7 +54,8 @@ public class VideosAdapter extends BaseRecycleViewAdapter<VideoInfo, VideoInfoHo
         @Override
         protected void bindData(VideoInfoHolder holder, int position) {
                 ItemVideoBinding binding = holder.getBinding();
-                binding.setVideoInfo(mData.get(position));
+                VideoInfo videoInfo = mData.get(position);
+                binding.setVideoInfo(videoInfo);
                 binding.setMode(mCurrentMode);
                 binding.setSelected(mSelectedPostions.contains(position));
                 binding.backContent.setOnLongClickListener(v -> {
@@ -79,22 +80,22 @@ public class VideosAdapter extends BaseRecycleViewAdapter<VideoInfo, VideoInfoHo
                 });
                 binding.thumb.setOnClickListener(v -> {
                         if (mListener != null) {
-                                mListener.onClickImage(position, mData.get(position));
+                                mListener.onClickImage(position, videoInfo);
                         }
                 });
 	        binding.rename.setOnClickListener(v -> {
 		        if (mListener != null) {
-			        mListener.onClickRename(position, mData.get(position));
+			        mListener.onClickRename(position, videoInfo);
 		        }
 	        });
 	        binding.delete.setOnClickListener(v -> {
 		        if (mListener != null) {
-			        mListener.onClickDelete(position, mData.get(position));
+			        mListener.onClickDelete(position, videoInfo);
 		        }
 	        });
 	        binding.share.setOnClickListener(v -> {
 		        if (mListener != null) {
-			        mListener.onClickShare(position, mData.get(position));
+			        mListener.onClickShare(position, videoInfo);
 		        }
 	        });
                 binding.foreground.setOnClickListener(v -> {
