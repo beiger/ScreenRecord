@@ -59,10 +59,7 @@
 	<string name="help_developer">Help developers</string>
 	<string name="reward_reason">本开发团队致力于开发无广告、无推送、纯净的录屏应用。\n无任何盈利的应用很难开发维护下去，</string>
 
-<<<<<<< HEAD
-	<string name="about_us">关于我们</string>
-=======
 	<string name="about_us">About us</string>
 	<string name="app_description">Welcome to use ScreenRecord. \n If you have any comments or suggestions, please let us know on the feedback page. We will deal with them in time and give you a reply. \n Thank you for your support!</string>
->>>>>>> 1 fix bugs
+
 </resources>

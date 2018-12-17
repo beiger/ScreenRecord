@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bing.example.R;
 import com.bing.example.databinding.ActivityFeedbackBinding;
@@ -29,6 +28,8 @@ import com.bing.mvvmbase.base.BaseViewModel;
 import com.bing.mvvmbase.utils.UiUtil;
 import com.blankj.utilcode.util.FileIOUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -53,22 +54,17 @@ public class FeedbackActivity extends BaseActivity<ActivityFeedbackBinding, Base
         private LinearLayout selectContainer;
 
         @Override
-        protected void onCreateFirst() {
+        public void onCreateFirst() {
                 UiUtil.setBarColorAndFontBlack(this, Color.TRANSPARENT);
         }
 
         @Override
-        protected void initViewModel() {
-                mViewModel = ViewModelProviders.of(this).get(BaseViewModel.class);
-        }
-
-        @Override
-        protected int layoutId() {
+        public int layoutId() {
                 return R.layout.activity_feedback;
         }
 
         @Override
-        protected void bindAndObserve() {
+        public void bindAndObserve() {
                 init();
         }
 
@@ -175,7 +171,7 @@ public class FeedbackActivity extends BaseActivity<ActivityFeedbackBinding, Base
         }
 
         @Override
-        public void onClick(View view) {
+        public void onClick(@NotNull View view) {
                 switch (view.getId()) {
                         case R.id.submitSuggestion:
                                 String suggestion = mEditText.getText().toString();
@@ -198,5 +194,10 @@ public class FeedbackActivity extends BaseActivity<ActivityFeedbackBinding, Base
 
         public String getAppLabel() {
                 return getResources().getString(R.string.app_name);
+        }
+
+        @Override
+        public void initViewModel() {
+                mViewModel = ViewModelProviders.of(this).get(BaseViewModel.class);
         }
 }

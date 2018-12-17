@@ -30,7 +30,7 @@ import android.text.format.DateUtils;
 import android.widget.RemoteViews;
 
 import com.bing.example.R;
-import com.bing.example.app.ScreenRecordApplication;
+import com.bing.mvvmbase.base.BaseApplication;
 import com.blankj.utilcode.util.LogUtils;
 
 import static android.os.Build.VERSION_CODES.O;
@@ -113,7 +113,7 @@ public class Notifications extends ContextWrapper {
         }
 
         private RemoteViews createContentView() {
-                final RemoteViews view = new RemoteViews(ScreenRecordApplication.getContext().getPackageName(), R.layout.layout_notification);
+                final RemoteViews view = new RemoteViews(BaseApplication.sContext.getPackageName(), R.layout.layout_notification);
                 setCommonView(view);
                 setCommonClickPending(view);
                 return view;
