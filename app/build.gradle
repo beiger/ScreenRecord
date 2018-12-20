@@ -123,6 +123,7 @@ dependencies {
     implementation 'com.yarolegovich:lovely-dialog:1.1.0'
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     implementation 'com.dinuscxj:recycleritemdecoration:1.0.0'
+    implementation 'com.github.recruit-lifestyle:FloatingView:2.4.0' //悬浮球
 
     //图标
     implementation 'com.mikepenz:fontawesome-typeface:5.0.6.0@aar'

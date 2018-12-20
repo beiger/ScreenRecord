@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.bing.example">
 
-    <uses-permission android:name="android.permission.REORDER_TASKS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.ACTION_OPEN_DOCUMENT" />
+        <uses-permission android:name="android.permission.REORDER_TASKS" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.RECORD_AUDIO" />
+        <uses-permission android:name="android.permission.ACTION_OPEN_DOCUMENT" />
+	<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
 	<application
 		android:name=".app.ScreenRecordApplication"
@@ -32,8 +34,10 @@
 			android:name=".otherdetails.SettingActivity"
 			android:screenOrientation="portrait" />
 		<activity android:name=".otherdetails.AboutActivity"/>
-		<activity android:name=".otherdetails.RewardActivity" />
 		<activity android:name=".otherdetails.FeedbackActivity" />
+		<service
+			android:name="com.bing.example.main.home.floatingview.CustomFloatingViewService"
+			android:exported="false"/>
 
         <provider
 			android:name="androidx.core.content.FileProvider"
