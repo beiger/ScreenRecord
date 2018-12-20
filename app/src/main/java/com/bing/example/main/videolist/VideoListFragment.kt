@@ -1,4 +1,4 @@
-package com.bing.example.main.fragment
+package com.bing.example.main.videolist
 
 import androidx.core.content.FileProvider
 import androidx.lifecycle.LiveData
@@ -13,9 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 
 import com.bing.example.R
 import com.bing.example.databinding.FragmentVideoListBinding
-import com.bing.example.main.adapter.VideosAdapter
-import com.bing.example.main.viewmodel.MainViewModel
-import com.bing.example.main.viewmodel.VideoListViewModel
+import com.bing.example.main.home.MainViewModel
 import com.bing.example.model.RepositoryManager
 import com.bing.example.model.entity.VideoInfo
 import com.bing.mvvmbase.base.recycleview.BaseRecycleViewFragment
@@ -30,7 +28,7 @@ import com.yarolegovich.lovelydialog.LovelyTextInputDialog
 
 import java.io.File
 
-import com.bing.example.main.adapter.VideosAdapter.Companion.MODE_SELECT
+import com.bing.example.main.videolist.VideosAdapter.Companion.MODE_SELECT
 
 class VideoListFragment : BaseRecycleViewFragment<FragmentVideoListBinding, VideoListViewModel, MainViewModel, VideosAdapter, VideoInfo>() {
         override fun initActivityViewModel() {
@@ -134,7 +132,7 @@ class VideoListFragment : BaseRecycleViewFragment<FragmentVideoListBinding, Vide
                         override fun onClickFore(position: Int, selectedNumber: Int) {
 
                         }
-                }, object : VideosAdapter.OnModeChangeListener{
+                }, object : VideosAdapter.OnModeChangeListener {
                         override fun onModeTo(mode: Int) {
                                 if (mode == VideosAdapter.MODE_NORMAL) {
                                         mActivityViewModel.isNormalMode.set(true)

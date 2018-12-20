@@ -1,4 +1,4 @@
-package com.bing.example.main.bindingadapter
+package com.bing.example.utils
 
 import android.widget.ImageView
 

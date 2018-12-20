@@ -1,4 +1,4 @@
-package com.bing.example.main.adapter
+package com.bing.example.main.videolist
 
 import com.bing.example.databinding.ItemVideoBinding
 import com.bing.mvvmbase.base.recycleview.BaseViewHolder

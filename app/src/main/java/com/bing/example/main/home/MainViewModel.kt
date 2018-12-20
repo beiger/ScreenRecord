@@ -1,4 +1,4 @@
-package com.bing.example.main.viewmodel
+package com.bing.example.main.home
 
 import android.app.Application
 

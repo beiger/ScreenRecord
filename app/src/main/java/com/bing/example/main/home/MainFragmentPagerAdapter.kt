@@ -1,4 +1,4 @@
-package com.bing.example.main.adapter
+package com.bing.example.main.home
 
 import android.view.ViewGroup
 

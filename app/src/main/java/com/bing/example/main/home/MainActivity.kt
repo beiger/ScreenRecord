@@ -1,4 +1,4 @@
-package com.bing.example.main.activity
+package com.bing.example.main.home
 
 import android.annotation.TargetApi
 import android.app.Activity
@@ -20,8 +20,7 @@ import android.view.View
 import android.widget.Toast
 
 import com.bing.example.databinding.ActivityMainBinding
-import com.bing.example.main.fragment.VideoListFragment
-import com.bing.example.main.viewmodel.MainViewModel
+import com.bing.example.main.videolist.VideoListFragment
 import com.bing.example.model.RepositoryManager
 import com.bing.example.model.entity.VideoInfo
 import com.bing.example.module.screenRecord.AudioEncodeConfig
@@ -60,6 +59,7 @@ import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.os.Build.VERSION_CODES.M
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.bing.example.otherdetails.SettingActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.OnClickListener {
         override fun initViewModel() {

@@ -1,4 +1,4 @@
-package com.bing.example.main.adapter
+package com.bing.example.main.videolist
 
 import android.view.ViewGroup
 

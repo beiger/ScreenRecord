@@ -1,4 +1,4 @@
-package com.bing.example.main.activity;
+package com.bing.example.otherdetails;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
