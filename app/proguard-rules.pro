@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#实体类
+-keep class com.bing.example.model.entity.**{*;}
+-keep class com.bing.example.module.screenRecord.**{*;}
+
+#jzvd
+-keep class * extends cn.jzvd.** {*;}
