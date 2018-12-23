@@ -18,6 +18,7 @@ import android.os.StrictMode
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bing.example.R
+import com.bing.example.main.notification.NotificationDelegate
 import com.bing.example.model.RepositoryManager
 import com.bing.example.model.entity.VideoInfo
 import com.bing.example.module.screenRecord.*
@@ -33,9 +34,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class RecordHelper(val activity: AppCompatActivity, private val viewModel: MainViewModel) {
+class RecordHelper(val activity: AppCompatActivity, private val viewModel: MainViewModel, private val notificationDelegate: NotificationDelegate) {
         private var mMediaProjectionManager: MediaProjectionManager = activity.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-        var mNotifications: Notifications = Notifications(activity)
         var mRecorder: ScreenRecorder? = null
         private val mStopActionReceiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
@@ -147,7 +147,7 @@ class RecordHelper(val activity: AppCompatActivity, private val viewModel: MainV
                         var startTime: Long = 0
 
                         override fun onStop(error: Throwable?) {
-                                mNotifications.clear()
+                                notificationDelegate.clear()
                                 val vmPolicy = StrictMode.getVmPolicy()
                                 val file = File(mRecorder!!.savedPath)
                                 mRecorder = null
@@ -183,7 +183,7 @@ class RecordHelper(val activity: AppCompatActivity, private val viewModel: MainV
                         }
 
                         override fun onStart() {
-                                mNotifications.recording(0)
+                                notificationDelegate.recording(0)
                         }
 
                         override fun onRecording(presentationTimeUs: Long) {
@@ -192,7 +192,7 @@ class RecordHelper(val activity: AppCompatActivity, private val viewModel: MainV
                                 }
                                 val time = (presentationTimeUs - startTime) / 1000
                                 LogUtils.i(time.toString() + "")
-                                mNotifications.recording(time)
+                                notificationDelegate.recording(time)
                         }
                 })
                 return r
@@ -211,7 +211,7 @@ class RecordHelper(val activity: AppCompatActivity, private val viewModel: MainV
                 try {
                         activity.unregisterReceiver(mStopActionReceiver)
                 } catch (e: Exception) {
-                        //ignored
+
                 }
 
         }

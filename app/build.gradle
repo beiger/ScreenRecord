@@ -23,6 +23,10 @@ android {
         enabled = true
     }
 
+    androidExtensions {
+        experimental = true
+    }
+
     lintOptions {
         disable 'GoogleAppIndexingWarning'
     }
@@ -138,4 +142,6 @@ dependencies {
     // 视频播放
     implementation 'cn.jzvd:jiaozivideoplayer:6.3.1'
     implementation 'androidx.exifinterface:exifinterface:1.0.0'
+
+    implementation 'com.alibaba:fastjson:1.2.39'
 }

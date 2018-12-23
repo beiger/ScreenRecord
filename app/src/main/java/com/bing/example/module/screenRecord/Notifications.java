@@ -1,24 +1,6 @@
-/*
- * Copyright (c) 2017 Yrom Wang <http://www.yrom.net>
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.bing.example.module.screenRecord;
 
-import android.annotation.TargetApi;
 import android.app.Notification;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -36,27 +18,21 @@ import com.blankj.utilcode.util.LogUtils;
 import static android.os.Build.VERSION_CODES.O;
 import static com.bing.example.main.home.RecordHelper.ACTION_STOP;
 
-/**
- * @author yrom
- * @version 2017/12/1
- */
 public class Notifications extends ContextWrapper {
-        private static final int id = 0x1fff;
-        private static final String CHANNEL_ID = "Recording";
-        private static final String CHANNEL_NAME = "Screen Recorder Notifications";
-
         private long mLastFiredTime = 0;
         private String mTime;
-        private NotificationManager mManager;
+        final private NotificationManager mManager;
+        final private int mNotificationID;
+        final private String mChannelID;
         private Notification.Action mStopAction;
         private Notification.Builder mBuilder;
         private RemoteViews mRemoteViews;
 
-        public Notifications(Context context) {
+        public Notifications(Context context, NotificationManager manager, int notificationID, String channelID) {
                 super(context);
-                if (Build.VERSION.SDK_INT >= O) {
-                        createNotificationChannel();
-                }
+                mManager = manager;
+                mNotificationID = notificationID;
+                mChannelID = channelID;
         }
 
         public void recording(long timeMs) {
@@ -70,7 +46,7 @@ public class Notifications extends ContextWrapper {
                 mRemoteViews.setTextViewText(R.id.time, mTime);
                 LogUtils.i("recording:" + mTime);
                 Notification notification = getBuilder().build();
-                getNotificationManager().notify(id, notification);
+                mManager.notify(mNotificationID, notification);
                 mLastFiredTime = SystemClock.elapsedRealtime();
         }
 
@@ -86,20 +62,12 @@ public class Notifications extends ContextWrapper {
                                 .setContent(mRemoteViews)
                                 .setSmallIcon(R.drawable.ic_stat_recording);
                         if (Build.VERSION.SDK_INT >= O) {
-                                builder.setChannelId(CHANNEL_ID)
+                                builder.setChannelId(mChannelID)
                                         .setUsesChronometer(true);
                         }
                         mBuilder = builder;
                 }
                 return mBuilder;
-        }
-
-        @TargetApi(O)
-        private void createNotificationChannel() {
-                NotificationChannel channel =
-                        new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW);
-                channel.setShowBadge(false);
-                getNotificationManager().createNotificationChannel(channel);
         }
 
         private Notification.Action stopAction() {
@@ -136,13 +104,6 @@ public class Notifications extends ContextWrapper {
                 mLastFiredTime = 0;
                 mBuilder = null;
                 mStopAction = null;
-                getNotificationManager().cancelAll();
-        }
-
-        NotificationManager getNotificationManager() {
-                if (mManager == null) {
-                        mManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                }
-                return mManager;
+                mManager.cancelAll();
         }
 }

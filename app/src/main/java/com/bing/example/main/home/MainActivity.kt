@@ -1,13 +1,12 @@
 package com.bing.example.main.home
 
 import android.app.Activity
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.os.Looper
 import android.view.View
 
 import com.bing.example.databinding.ActivityMainBinding
@@ -32,17 +31,35 @@ import cn.jzvd.Jzvd
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bing.example.main.home.floatingview.FloatHelper
+import com.bing.example.main.notification.NotificationDelegate
 import com.bing.example.otherdetails.SettingActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.OnClickListener {
         private lateinit var mVideoListFragment: VideoListFragment
         private lateinit var mRecordHelper: RecordHelper
         private lateinit var mFloatHelper: FloatHelper
+        private val mNotificationDelegate: NotificationDelegate by lazy {
+                NotificationDelegate(this)
+        }
+        private val mStartRecordReceiver = object : BroadcastReceiver() {
+                override fun onReceive(context: Context, intent: Intent) {
+                        if (ACTION_START == intent.action) {
+                                mRecordHelper.onRecordButtonClick()
+                        }
+                }
+        }
 
         override fun onCreate(savedInstanceState: Bundle?) {
                 super.onCreate(savedInstanceState)
+                initDrawer(savedInstanceState)
 
-                val toolbar = findViewById<Toolbar>(R.id.toolbar)
+                initRecordHelper()
+                initFloatHelper()
+                initBroadcastRecieve()
+        }
+
+        private fun initDrawer(savedInstanceState: Bundle?) {
+                val toolbar: Toolbar = findViewById(R.id.toolbar)
                 setSupportActionBar(toolbar)
                 val actionBar = supportActionBar!!
                 actionBar.title = ""
@@ -99,20 +116,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.On
         }
 
         override fun bindAndObserve() {
-                mRecordHelper = RecordHelper(this, mViewModel)
-                mFloatHelper = FloatHelper(this)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        val channelId = "default_floatingview_channel";
-                        val channelName = "Default Channel";
-                        val defaultChannel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_MIN);
-                        val manager: NotificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager;
-                        manager.createNotificationChannel(defaultChannel)
-                }
-                Looper.myQueue().addIdleHandler {
-                        mFloatHelper.showFloatingView(true, true)
-                        false
-                }
-
                 mViewModel.videoEncodeConfigLive.observe(this, Observer{ config ->
                         if (config != null) {
                                 mViewModel.videoEncodeConfig = config
@@ -141,6 +144,30 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.On
                 viewPager.adapter = fragmentPagerAdapter
         }
 
+        private fun initRecordHelper() {
+                mRecordHelper = RecordHelper(this, mViewModel, mNotificationDelegate)
+        }
+
+        private fun initFloatHelper() {
+                mFloatHelper = FloatHelper(this)
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                        val channelId = "default_floatingview_channel";
+//                        val channelName = "Default Channel";
+//                        val defaultChannel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_MIN);
+//                        val manager: NotificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager;
+//                        manager.createNotificationChannel(defaultChannel)
+//                }
+//                Looper.myQueue().addIdleHandler {
+//                        mFloatHelper.showFloatingView(true, true)
+//                        false
+//                }
+        }
+
+        private fun initBroadcastRecieve() {
+                registerReceiver(mStartRecordReceiver, IntentFilter(ACTION_START))
+                mNotificationDelegate.showGlobal()
+        }
+
         override fun onClick(v: View) {
                 when (v.id) {
                         R.id.record -> onRecordButtonClick()
@@ -151,6 +178,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.On
 
                         R.id.select_all -> mVideoListFragment.onClickSelectAll()
                 }
+        }
+
+        private fun onRecordButtonClick() {
+                mVideoListFragment.intoNormalMode()
+                mRecordHelper.onRecordButtonClick()
         }
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -181,7 +213,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.On
                 if (mVideoListFragment.onBackPressed()) {
                         return
                 }
-                super.onBackPressed()
+                moveTaskToBack(false)
         }
 
         override fun onPause() {
@@ -194,12 +226,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.On
                 mRecordHelper.onDestroy()
         }
 
-        private fun onRecordButtonClick() {
-                mVideoListFragment.intoNormalMode()
-                mRecordHelper.onRecordButtonClick()
-        }
-
         companion object {
                 private const val REQUEST_SETTINGS = 2
+                const val ACTION_START = "net.yrom.screenrecorder.action.START"
         }
 }

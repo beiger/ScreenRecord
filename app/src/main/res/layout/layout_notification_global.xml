@@ -13,7 +13,7 @@
         android:src="@mipmap/app_icon" />
 
     <ImageButton
-        android:id="@+id/stop"
+        android:id="@+id/start_record"
         style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -36,7 +36,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:src="@drawable/ic_stop_black_24dp"
+        android:src="@drawable/ic_wrong"
         android:tint="@color/colorAccent" />
 
 </LinearLayout>
