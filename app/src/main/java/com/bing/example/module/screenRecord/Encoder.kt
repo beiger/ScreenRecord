@@ -14,24 +14,25 @@
  * limitations under the License.
  */
 
-package com.bing.example.module.screenRecord;
+package com.bing.example.module.screenRecord
 
-import java.io.IOException;
+import java.io.IOException
 
 /**
  * @author yrom
  * @version 2017/12/4
  */
-interface Encoder {
-        void prepare() throws IOException;
+internal interface Encoder {
+        @Throws(IOException::class)
+        fun prepare()
 
-        void stop();
+        fun stop()
 
-        void release();
+        fun release()
 
-        void setCallback(Callback callback);
+        fun setCallback(callback: Callback)
 
         interface Callback {
-                void onError(Encoder encoder, Exception exception);
+                fun onError(encoder: Encoder, exception: Exception)
         }
 }
