@@ -1,11 +1,13 @@
 package com.bing.example.main.home
 
 import android.app.Activity
+import android.app.ActivityManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 
@@ -33,6 +35,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.bing.example.main.home.floatingview.FloatHelper
 import com.bing.example.main.notification.NotificationDelegate
 import com.bing.example.otherdetails.SettingActivity
+import com.blankj.utilcode.util.AppUtils
+import java.lang.reflect.Method
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.OnClickListener {
         private lateinit var mVideoListFragment: VideoListFragment
@@ -43,9 +47,61 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.On
         }
         private val mStartRecordReceiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
-                        if (ACTION_START == intent.action) {
-                                mRecordHelper.onRecordButtonClick()
+                        when (intent.action) {
+                                ACTION_RECORD -> {
+                                        collapseStatusBar(this@MainActivity)
+                                        mRecordHelper.onRecordButtonClick()
+                                }
+                                ACTION_VIDEO_LIST -> {
+                                        collapseStatusBar(this@MainActivity)
+                                        moveActivityToFont()
+                                }
+                                ACTION_EXIT_APP -> {
+                                        mNotificationDelegate.clearAll()
+                                        collapseStatusBar(this@MainActivity)
+                                        AppUtils.exitApp()
+                                }
                         }
+                }
+        }
+
+        private fun moveActivityToFont() {
+                //获取ActivityManager
+                val mAm = this.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+
+                //获得当前运行的task
+                val taskList = mAm.getRunningTasks(100)
+                for (rti in taskList) {
+                        //找到当前应用的task，并启动task的栈顶activity，达到程序切换到前台
+                        if(rti.topActivity.packageName == packageName) {
+                                mAm.moveTaskToFront(rti.id, ActivityManager.MOVE_TASK_WITH_HOME)
+                                return
+                        }
+                }
+                //若没有找到运行的task，用户结束了task或被系统释放，则重新启动mainactivity
+                val resultIntent = Intent(this, MainActivity::class.java)
+                resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                startActivity(resultIntent)
+        }
+
+        /**
+         *
+         * 收起通知栏
+         * @param context
+         */
+        fun collapseStatusBar(context: Context) {
+                try {
+                        val statusBarManager = context.getSystemService("statusbar")
+                        val collapse: Method
+                        if (Build.VERSION.SDK_INT <= 16) {
+                                collapse = statusBarManager.javaClass.getMethod("collapse");
+                        } else {
+                                collapse = statusBarManager::class.java.getMethod("collapsePanels");
+                        }
+                        collapse.isAccessible = true
+                        collapse.invoke(statusBarManager);
+                } catch (localException: Exception) {
+                        localException.printStackTrace()
                 }
         }
 
@@ -164,7 +220,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.On
         }
 
         private fun initBroadcastRecieve() {
-                registerReceiver(mStartRecordReceiver, IntentFilter(ACTION_START))
+                val intentFilter = IntentFilter()
+                intentFilter.addAction(ACTION_RECORD)
+                intentFilter.addAction(ACTION_VIDEO_LIST)
+                intentFilter.addAction(ACTION_EXIT_APP)
+                registerReceiver(mStartRecordReceiver, intentFilter)
                 mNotificationDelegate.showGlobal()
         }
 
@@ -224,10 +284,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.On
         override fun onDestroy() {
                 super.onDestroy()
                 mRecordHelper.onDestroy()
+                mNotificationDelegate.clearAll()
         }
 
         companion object {
                 private const val REQUEST_SETTINGS = 2
-                const val ACTION_START = "net.yrom.screenrecorder.action.START"
+                const val ACTION_RECORD = "net.yrom.screenrecorder.action.RECORD"
+                const val ACTION_VIDEO_LIST = "net.yrom.screenrecorder.action.VIDEO_LIST"
+                const val ACTION_EXIT_APP = "net.yrom.screenrecorder.action.EXIT_APP"
         }
 }

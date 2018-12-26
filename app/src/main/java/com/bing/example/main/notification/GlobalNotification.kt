@@ -13,7 +13,9 @@ import com.bing.example.R
 import com.bing.mvvmbase.base.BaseApplication
 
 import android.os.Build.VERSION_CODES.O
-import com.bing.example.main.home.MainActivity.Companion.ACTION_START
+import com.bing.example.main.home.MainActivity.Companion.ACTION_EXIT_APP
+import com.bing.example.main.home.MainActivity.Companion.ACTION_RECORD
+import com.bing.example.main.home.MainActivity.Companion.ACTION_VIDEO_LIST
 
 class GlobalNotification(context: Context, val manager: NotificationManager, val notificationID: Int, val channelID: String) : ContextWrapper(context) {
 
@@ -45,10 +47,20 @@ class GlobalNotification(context: Context, val manager: NotificationManager, val
 
         // 播放或暂停，下一曲，关闭
         private fun setCommonClickPending(view: RemoteViews) {
-                val intentStartRecord = Intent(ACTION_START).setPackage(packageName)
-                val pendingIntent = PendingIntent.getBroadcast(this, 1,
-                        intentStartRecord, PendingIntent.FLAG_ONE_SHOT)
-                view.setOnClickPendingIntent(R.id.start_record, pendingIntent)
+                val intentStartRecord = Intent(ACTION_RECORD).setPackage(packageName)
+                val pendingIntent1 = PendingIntent.getBroadcast(this, 1,
+                        intentStartRecord, PendingIntent.FLAG_UPDATE_CURRENT)
+                view.setOnClickPendingIntent(R.id.start_record, pendingIntent1)
+
+                val intentVideoList = Intent(ACTION_VIDEO_LIST).setPackage(packageName)
+                val pendingIntent2 = PendingIntent.getBroadcast(this, 2,
+                        intentVideoList, PendingIntent.FLAG_UPDATE_CURRENT)
+                view.setOnClickPendingIntent(R.id.list, pendingIntent2)
+
+                val intentExitApp = Intent(ACTION_EXIT_APP).setPackage(packageName)
+                val pendingIntent3 = PendingIntent.getBroadcast(this, 3,
+                        intentExitApp, PendingIntent.FLAG_UPDATE_CURRENT)
+                view.setOnClickPendingIntent(R.id.exit, pendingIntent3)
         }
 
         fun clear() {

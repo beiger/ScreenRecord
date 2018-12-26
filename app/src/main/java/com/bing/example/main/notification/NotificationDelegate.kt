@@ -10,8 +10,8 @@ import android.os.Build
 
 class NotificationDelegate(val context: Context) : ContextWrapper(context) {
         val id = 0x1fff
-       val CHANNEL_ID = "Screen Recorder"
-        val CHANNEL_NAME = "Screen Recorder Notifications"
+       private val CHANNEL_ID = "Screen Recorder"
+        private val CHANNEL_NAME = "Screen Recorder Notifications"
 
         private val mManager: NotificationManager by lazy {
                 val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -23,18 +23,20 @@ class NotificationDelegate(val context: Context) : ContextWrapper(context) {
                 manager
         }
 
-        val notifications: Notifications = Notifications(context, mManager, id, CHANNEL_ID);
-        val globalNotification = GlobalNotification(context, mManager, id, CHANNEL_ID);
+        private val notifications: Notifications = Notifications(context, mManager, id, CHANNEL_ID);
+        private val globalNotification = GlobalNotification(context, mManager, id, CHANNEL_ID);
 
         fun recording(timeMs: Long) {
                 notifications.recording(timeMs)
         }
 
         fun showGlobal() {
+                notifications.clear()
                 globalNotification.show()
         }
 
-        fun clear() {
+        fun clearAll() {
                 notifications.clear()
+                globalNotification.clear()
         }
 }

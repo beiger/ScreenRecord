@@ -147,7 +147,7 @@ class RecordHelper(val activity: AppCompatActivity, private val viewModel: MainV
                         var startTime: Long = 0
 
                         override fun onStop(error: Throwable?) {
-                                notificationDelegate.clear()
+                                notificationDelegate.showGlobal()
                                 val vmPolicy = StrictMode.getVmPolicy()
                                 val file = File(mRecorder!!.savedPath)
                                 mRecorder = null
