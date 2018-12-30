@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -19,7 +18,6 @@ import com.bing.example.otherdetails.AboutActivity
 import com.bing.example.otherdetails.FeedbackActivity
 import com.bing.mvvmbase.base.BaseActivity
 import com.bing.mvvmbase.base.viewpager.BaseFragmentPagerAdapter
-import com.bing.mvvmbase.utils.UiUtil
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
@@ -35,10 +33,14 @@ import androidx.lifecycle.ViewModelProviders
 import com.bing.example.main.home.floatingview.FloatHelper
 import com.bing.example.main.notification.NotificationDelegate
 import com.bing.example.otherdetails.SettingActivity
+import com.bing.example.search.SearchActivity
 import com.blankj.utilcode.util.AppUtils
+import com.mikepenz.materialdrawer.Drawer
+import org.jetbrains.anko.startActivity
 import java.lang.reflect.Method
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.OnClickListener {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+        private lateinit var mDrawer: Drawer
         private lateinit var mVideoListFragment: VideoListFragment
         private lateinit var mRecordHelper: RecordHelper
         private lateinit var mFloatHelper: FloatHelper
@@ -127,10 +129,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.On
                         .withSavedInstance(savedInstanceState)
                         .build()
 
-                DrawerBuilder()
+                mDrawer = DrawerBuilder()
                         .withActivity(this)
                         .withAccountHeader(headerResult)
-                        .withToolbar(toolbar)
+//                        .withToolbar(toolbar)
                         .withFullscreen(true)
                         .addDrawerItems(
                                 PrimaryDrawerItem().withName(R.string.config).withIcon(R.drawable.ic_setting).withIdentifier(1),
@@ -159,10 +161,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.On
                         .build()
         }
 
-        override fun onCreateFirst() {
-                UiUtil.setBarColorAndFontBlack(this, Color.TRANSPARENT)
-        }
-
         override fun layoutId(): Int {
                 return R.layout.activity_main
         }
@@ -182,10 +180,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.On
                                 mViewModel.audioEncodeConfig = audioEncodeConfig
                         }
                 })
-                mBinding.record.setOnClickListener(this)
-                mBinding.back.setOnClickListener(this)
-                mBinding.delete.setOnClickListener(this)
-                mBinding.selectAll.setOnClickListener(this)
+                addOnClickListener(mBinding.menu, mBinding.record, mBinding.back, mBinding.delete, mBinding.selectAll, mBinding.searchText, mBinding.ivSearch)
                 initViewPager()
                 mBinding.isNormalMode = mViewModel.isNormalMode
         }
@@ -230,6 +225,18 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), View.On
 
         override fun onClick(v: View) {
                 when (v.id) {
+                        R.id.menu -> {
+                                if (mDrawer.isDrawerOpen) {
+                                        mDrawer.closeDrawer()
+                                } else {
+                                        mDrawer.openDrawer()
+                                }
+                        }
+
+                        R.id.searchText, R.id.ivSearch -> {
+                                startActivity<SearchActivity>()
+                        }
+
                         R.id.record -> onRecordButtonClick()
 
                         R.id.back -> mVideoListFragment.onClickBack()

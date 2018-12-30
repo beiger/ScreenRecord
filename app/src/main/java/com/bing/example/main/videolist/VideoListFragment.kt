@@ -33,6 +33,7 @@ import java.io.File
 import com.bing.example.main.videolist.VideosAdapter.Companion.MODE_SELECT
 
 class VideoListFragment : BaseRecycleViewFragment<FragmentVideoListBinding, VideoListViewModel, MainViewModel, VideosAdapter, VideoInfo>() {
+
         override fun initActivityViewModel() {
                 mActivityViewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
         }
@@ -40,7 +41,6 @@ class VideoListFragment : BaseRecycleViewFragment<FragmentVideoListBinding, Vide
         override fun initViewModel() {
                 mViewModel = ViewModelProviders.of(this).get(VideoListViewModel::class.java)
         }
-
 
         override val refreshLayout: SmartRefreshLayout
                 get() = mBinding.refreshLayout
@@ -166,11 +166,11 @@ class VideoListFragment : BaseRecycleViewFragment<FragmentVideoListBinding, Vide
         }
 
         fun onBackPressed(): Boolean {
-                if (mAdapter.currentMode == MODE_SELECT) {
+                return if (mAdapter.currentMode == MODE_SELECT) {
                         mAdapter.intoNormalMode()
-                        return true
+                        true
                 } else {
-                        return false
+                        false
                 }
         }
 
