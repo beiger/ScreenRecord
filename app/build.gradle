@@ -9,8 +9,8 @@ android {
         applicationId "com.bing.example"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 2
-        versionName "1.02"
+        versionCode 3
+        versionName "1.03"
     }
 
     //指定jdk版本
@@ -89,6 +89,7 @@ dependencies {
     implementation "androidx.core:core-ktx:1.0.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
+    implementation "org.jetbrains.anko:anko:0.10.8"
 
     implementation 'androidx.core:core:1.0.1'
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -128,6 +129,8 @@ dependencies {
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     implementation 'com.dinuscxj:recycleritemdecoration:1.0.0'
     implementation 'com.github.recruit-lifestyle:FloatingView:2.4.0' //悬浮球
+    implementation 'com.afollestad.material-dialogs:core:2.0.0-rc5' //dialog
+    implementation 'com.afollestad.material-dialogs:input:2.0.0-rc5' //dialog
 
     //图标
     implementation 'com.mikepenz:fontawesome-typeface:5.0.6.0@aar'

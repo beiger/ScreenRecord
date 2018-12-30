@@ -10,6 +10,8 @@ import cn.jzvd.JzvdStd
 
 import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 
 import com.bing.example.R
 import com.bing.example.databinding.FragmentVideoListBinding
@@ -96,27 +98,25 @@ class VideoListFragment : BaseRecycleViewFragment<FragmentVideoListBinding, Vide
                         }
 
                         override fun onClickRename(position: Int, videoInfo: VideoInfo) {
-                                LovelyTextInputDialog(context)
-                                        .setTopColorRes(R.color.color18)
-                                        .setMessage(R.string.rename)
-                                        .setIcon(R.drawable.ic_edit_black_24dp)
-                                        .setConfirmButton(android.R.string.ok) { text ->
+                                MaterialDialog(context!!).show {
+                                        message(R.string.rename)
+                                        input { _, text ->
                                                 val videoInfo1 = videoInfo.copy()
-                                                videoInfo1.title = text
+                                                videoInfo1.title = text.toString()
                                                 RepositoryManager.instance().updateVideo(videoInfo1)
                                         }
-                                        .show()
+                                        positiveButton(android.R.string.ok)
+                                }
                         }
 
                         override fun onClickDelete(position: Int, videoInfo: VideoInfo) {
-                                LovelyStandardDialog(context, LovelyStandardDialog.ButtonLayout.HORIZONTAL)
-                                        .setTopColorRes(R.color.color21)
-                                        .setButtonsColorRes(R.color.color22)
-                                        .setIcon(R.drawable.ic_delete_black_24dp)
-                                        .setMessage(R.string.sure_delete)
-                                        .setPositiveButton(android.R.string.ok) { v -> mViewModel.deleteVideo(videoInfo) }
-                                        .setNegativeButton(android.R.string.no, null)
-                                        .show()
+                                MaterialDialog(context!!).show {
+                                        message(R.string.sure_delete)
+                                        positiveButton(android.R.string.ok) {
+                                                mViewModel.deleteVideo(videoInfo)
+                                        }
+                                        negativeButton(android.R.string.no) { }
+                                }
                         }
 
                         override fun onClickShare(position: Int, videoInfo: VideoInfo) {
