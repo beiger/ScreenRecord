@@ -72,5 +72,4 @@ class VideoEditActivity : BaseRecycleViewActivity<ActivityVideoEditBinding, Base
                         R.id.back -> finish()
                 }
         }
-
 }

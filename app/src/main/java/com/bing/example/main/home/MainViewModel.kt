@@ -13,12 +13,22 @@ import com.blankj.utilcode.util.FileIOUtils
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import com.bing.example.app.globalAudioConfig
+import com.bing.example.app.globalVideoConfig
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
         val videoEncodeConfigLive = MutableLiveData<VideoEncodeConfig>()
         var videoEncodeConfig: VideoEncodeConfig? = null
+                set(value) {
+                        field = value
+                        globalVideoConfig = value
+                }
         val audioEncodeConfigLive = MutableLiveData<AudioEncodeConfig>()
         var audioEncodeConfig: AudioEncodeConfig? = null
+                set(value) {
+                        field = value
+                        globalAudioConfig = value
+                }
 
         val isNormalMode = ObservableBoolean(true)
 

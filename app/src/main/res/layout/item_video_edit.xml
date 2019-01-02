@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout  xmlns:android="http://schemas.android.com/apk/res/android">
+<<<<<<< HEAD
 	<androidx.cardview.widget.CardView
 		android:orientation="vertical"
 		android:layout_width="match_parent"
@@ -27,4 +28,14 @@
             android:textSize="15sp"/>
 	</LinearLayout>
 	</androidx.cardview.widget.CardView>
+=======
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="150dp"
+		android:background="@color/colorAccent">
+
+
+	</LinearLayout>
+>>>>>>> add video edit page
 </layout>

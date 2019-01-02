@@ -24,7 +24,7 @@ class NotificationDelegate(val context: Context) : ContextWrapper(context) {
         }
 
         private val notifications: Notifications = Notifications(context, mManager, id, CHANNEL_ID);
-        private val globalNotification = GlobalNotification(context, mManager, id, CHANNEL_ID);
+        val globalNotification = GlobalNotification(context, mManager, id, CHANNEL_ID);
 
         fun recording(timeMs: Long) {
                 notifications.recording(timeMs)

@@ -25,7 +25,7 @@ class GlobalNotification(context: Context, val manager: NotificationManager, val
                 view
         }
 
-        private val builder: Notification.Builder by lazy {
+        val builder: Notification.Builder by lazy {
                 val field = Notification.Builder(this)
                         .setOngoing(true)
                         .setLocalOnly(true)

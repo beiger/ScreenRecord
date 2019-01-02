@@ -201,7 +201,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
 
         private fun initRecordHelper() {
-                mRecordHelper = RecordHelper(this, mViewModel, mNotificationDelegate)
+                mRecordHelper = RecordHelper(this, mNotificationDelegate)
         }
 
         private fun initFloatHelper() {

@@ -18,6 +18,8 @@ import android.os.StrictMode
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bing.example.R
+import com.bing.example.app.globalAudioConfig
+import com.bing.example.app.globalVideoConfig
 import com.bing.example.main.notification.NotificationDelegate
 import com.bing.example.model.RepositoryManager
 import com.bing.example.model.entity.VideoInfo
@@ -34,7 +36,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class RecordHelper(val activity: AppCompatActivity, private val viewModel: MainViewModel, private val notificationDelegate: NotificationDelegate) {
+class RecordHelper(val activity: AppCompatActivity, private val notificationDelegate: NotificationDelegate) {
         private var mMediaProjectionManager: MediaProjectionManager = activity.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
         var mRecorder: ScreenRecorder? = null
         private val mStopActionReceiver = object : BroadcastReceiver() {
@@ -57,7 +59,7 @@ class RecordHelper(val activity: AppCompatActivity, private val viewModel: MainV
 
         @TargetApi(Build.VERSION_CODES.M)
         private fun requestPermissions() {
-                val permissions = if (viewModel.audioEncodeConfig != null)
+                val permissions = if (globalAudioConfig != null)
                         arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO)
                 else
                         arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -81,7 +83,7 @@ class RecordHelper(val activity: AppCompatActivity, private val viewModel: MainV
         private fun hasPermissions(): Boolean {
                 val pm = activity.packageManager
                 val packageName = activity.packageName
-                val granted = (if (viewModel.audioEncodeConfig != null) {
+                val granted = (if (globalAudioConfig != null) {
                         pm.checkPermission(Manifest.permission.RECORD_AUDIO, packageName)
                 } else {
                         PackageManager.PERMISSION_GRANTED
@@ -114,8 +116,8 @@ class RecordHelper(val activity: AppCompatActivity, private val viewModel: MainV
                         val mediaProjection = mMediaProjectionManager.getMediaProjection(resultCode, data!!)
                                 ?: return
 
-                        val video = viewModel.videoEncodeConfig
-                        val audio = viewModel.audioEncodeConfig // audio can be null
+                        val video = globalVideoConfig
+                        val audio = globalAudioConfig // audio can be null
                         if (video == null) {
                                 ToastUtils.showShort("Create ScreenRecorder failure")
                                 mediaProjection.stop()
