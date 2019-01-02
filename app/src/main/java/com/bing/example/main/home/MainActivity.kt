@@ -34,6 +34,7 @@ import com.bing.example.main.home.floatingview.FloatHelper
 import com.bing.example.main.notification.NotificationDelegate
 import com.bing.example.otherdetails.SettingActivity
 import com.bing.example.search.SearchActivity
+import com.bing.example.videoedit.VideoEditActivity
 import com.blankj.utilcode.util.AppUtils
 import com.mikepenz.materialdrawer.Drawer
 import org.jetbrains.anko.startActivity
@@ -135,7 +136,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 //                        .withToolbar(toolbar)
                         .withFullscreen(true)
                         .addDrawerItems(
-                                PrimaryDrawerItem().withName(R.string.config).withIcon(R.drawable.ic_setting).withIdentifier(1),
+                                PrimaryDrawerItem().withName(R.string.video_edit).withIcon(R.drawable.ic_setting).withIdentifier(1),
+                                PrimaryDrawerItem().withName(R.string.config).withIcon(R.drawable.ic_setting).withIdentifier(2),
                                 PrimaryDrawerItem().withName(R.string.feedback).withIcon(R.drawable.ic_feedback).withIdentifier(3),
                                 PrimaryDrawerItem().withName(R.string.about).withIcon(R.drawable.ic_about).withIdentifier(4)
                         )
@@ -143,6 +145,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                         .withOnDrawerItemClickListener { _, _, drawerItem ->
                                 when {
                                         drawerItem!!.identifier == 1L -> {
+                                                startActivity<VideoEditActivity>()
+                                        }
+                                        drawerItem!!.identifier == 2L -> {
                                                 val intent = Intent(this@MainActivity, SettingActivity::class.java)
                                                 startActivityForResult(intent, REQUEST_SETTINGS)
                                         }

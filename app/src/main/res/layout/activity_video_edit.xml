@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="48dp"
+			app:contentInsetStart="0dp"
+			android:elevation="4dp"
+			android:background="@color/accent">
+
+			<ImageView
+				android:id="@+id/back"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:scaleType="centerInside"
+				android:src="@drawable/ic_arrow_back_black"
+				android:background="?android:selectableItemBackground" />
+
+			<TextView
+				android:id="@+id/toolbar_title"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:gravity="center"
+				android:textColor="@color/black_color_aa"
+				android:typeface="sans"
+				android:textSize="18sp"
+				android:text="@string/video_edit" />
+		</androidx.appcompat.widget.Toolbar>
+
+		<com.bing.statuslayout.StatusLayout
+			android:id="@+id/statusLayout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<com.scwang.smartrefresh.layout.SmartRefreshLayout
+				android:id="@+id/refreshLayout"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				app:srlEnableAutoLoadMore="false"
+				app:srlEnableLoadMore="true">
+
+				<com.scwang.smartrefresh.layout.header.ClassicsHeader
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					app:srlClassicsSpinnerStyle="FixedBehind"
+					app:srlDrawableArrowSize="20dp"
+					app:srlDrawableMarginRight="20dp"
+					app:srlDrawableProgress="@drawable/ic_progress_puzzle"
+					app:srlDrawableProgressSize="20dp"
+					app:srlEnableLastTime="true"
+					app:srlFinishDuration="500"
+					app:srlTextSizeTime="10dp"
+					app:srlTextSizeTitle="16sp"
+					app:srlTextTimeMarginTop="2dp" />
+
+				<androidx.recyclerview.widget.RecyclerView
+					android:id="@+id/recyclerView"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginTop="8dp"
+					android:layout_marginStart="8dp"
+					android:layout_marginEnd="8dp"
+					android:overScrollMode="never"
+					tools:listitem="@android:layout/simple_list_item_2" />
+
+				<com.scwang.smartrefresh.layout.footer.ClassicsFooter
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content" />
+			</com.scwang.smartrefresh.layout.SmartRefreshLayout>
+		</com.bing.statuslayout.StatusLayout>
+	</LinearLayout>
+</layout>

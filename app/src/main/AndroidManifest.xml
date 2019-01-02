@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bing.example">
+        package="com.bing.example">
 
     <uses-permission android:name="android.permission.REORDER_TASKS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -11,20 +11,21 @@
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
 
     <application
-        android:name=".app.ScreenRecordApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/app_icon"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/app_icon"
-        android:supportsRtl="true"
-        android:textAllCaps="false"
-        android:theme="@style/AppTheme">
-        <activity android:name=".search.SearchActivity"></activity>
-        <activity
-            android:name=".main.home.MainActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:name=".app.ScreenRecordApplication"
+            android:allowBackup="true"
+            android:icon="@mipmap/app_icon"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:roundIcon="@mipmap/app_icon"
+            android:supportsRtl="true"
+            android:textAllCaps="false"
+            android:theme="@style/AppTheme">
+        <activity android:name=".videoedit.VideoEditActivity"></activity>
+        <activity android:name=".search.SearchActivity" />
+        <activity
+                android:name=".main.home.MainActivity"
+                android:configChanges="orientation|screenSize|keyboardHidden"
+                android:label="@string/app_name"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,23 +33,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".otherdetails.SettingActivity"
-            android:screenOrientation="portrait" />
+                android:name=".otherdetails.SettingActivity"
+                android:screenOrientation="portrait" />
         <activity android:name=".otherdetails.AboutActivity" />
         <activity android:name=".otherdetails.FeedbackActivity" />
 
         <service
-            android:name=".main.home.floatingview.CustomFloatingViewService"
-            android:exported="false" />
+                android:name=".main.home.floatingview.CustomFloatingViewService"
+                android:exported="false" />
 
         <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.bing.example.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="com.bing.example.fileprovider"
+                android:exported="false"
+                android:grantUriPermissions="true">
             <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths" />
         </provider>
     </application>
 

@@ -60,4 +60,6 @@
 
 	<string name="about_us">关于我们</string>
 	<string name="app_description">欢迎您使用屏幕录制助手。\n如有任何意见或建议，请在反馈页面告知我们，我们将及时处理并给您答复。\n感谢您的支持！</string>
+	<string name="search">搜索</string>
+	<string name="video_edit">视频编辑</string>
 </resources>
