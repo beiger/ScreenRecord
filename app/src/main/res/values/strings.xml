@@ -63,9 +63,6 @@
 	<string name="app_description">Welcome to use ScreenRecord. \n If you have any comments or suggestions, please let us know on the feedback page. We will deal with them in time and give you a reply. \n Thank you for your support!</string>
 	<string name="search">Search</string>
 	<string name="video_edit">Video Edit</string>
-<<<<<<< HEAD
     <string name="jianqie">EditVideo</string>
-=======
->>>>>>> add video edit page
 
 </resources>
