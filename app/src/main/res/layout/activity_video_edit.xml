@@ -20,11 +20,7 @@
 				android:layout_width="48dp"
 				android:layout_height="48dp"
 				android:scaleType="centerInside"
-<<<<<<< HEAD
 				android:src="@drawable/ic_arrow_back_white"
-=======
-				android:src="@drawable/ic_arrow_back_black"
->>>>>>> add video edit page
 				android:background="?android:selectableItemBackground" />
 
 			<TextView
@@ -32,11 +28,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="match_parent"
 				android:gravity="center"
-<<<<<<< HEAD
 				android:textColor="@color/white"
-=======
-				android:textColor="@color/black_color_aa"
->>>>>>> add video edit page
 				android:typeface="sans"
 				android:textSize="18sp"
 				android:text="@string/video_edit" />
@@ -52,12 +44,8 @@
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				app:srlEnableAutoLoadMore="false"
-<<<<<<< HEAD
 				app:srlEnableLoadMore="false"
 				app:srlEnableRefresh="false">
-=======
-				app:srlEnableLoadMore="true">
->>>>>>> add video edit page
 
 				<com.scwang.smartrefresh.layout.header.ClassicsHeader
 					android:layout_width="match_parent"
