@@ -76,10 +76,11 @@ class RecordActivity : Activity() {
                 if (requestCode == REQUEST_MEDIA_PROJECTION && resultCode == Activity.RESULT_OK) {
                         val mediaProjection = mMediaProjectionManager.getMediaProjection(resultCode, data!!) ?: return
                         CountDownManager(this)
-                                .startCountDown(3) {
-                                        RecordHelper.newRecorder(mediaProjection)
+                                .startCountDown(3, {
                                         finish()
-                                 }
+                                },  {
+                                        RecordHelper.newRecorder(mediaProjection)
+                                 })
                 }
         }
 

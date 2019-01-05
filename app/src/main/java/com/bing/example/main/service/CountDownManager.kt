@@ -22,7 +22,7 @@ class CountDownManager(val context: Context) {
 
         private val viewList: MutableList<View> = mutableListOf()
 
-        fun startCountDown(number: Int, callback: () -> Unit) {
+        fun startCountDown(number: Int, start: () -> Unit, callback: () -> Unit) {
                 val inflater: LayoutInflater = LayoutInflater.from(context)
                 val textView = inflater.inflate(R.layout.layout_count_down, null) as TextView
                 val params = WindowManager.LayoutParams()
@@ -36,6 +36,8 @@ class CountDownManager(val context: Context) {
                 viewList.add(textView)
 
                 var animate: ViewPropertyAnimator? = null
+
+                start()
 
                 val disposable = Observable
                         .interval(0, 1000, TimeUnit.MILLISECONDS)

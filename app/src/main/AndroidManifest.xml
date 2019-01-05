@@ -21,7 +21,8 @@
 		android:theme="@style/AppTheme">
 		<activity
 			android:name=".main.service.RecordActivity"
-			android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+			android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+			android:launchMode="singleInstance"/>
 		<activity
 			android:name=".main.home.MainActivity"
 			android:configChanges="orientation|screenSize|keyboardHidden"
