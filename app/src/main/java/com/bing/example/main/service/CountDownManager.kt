@@ -3,7 +3,6 @@ package com.bing.example.main.service
 import android.content.Context
 import android.graphics.PixelFormat
 import android.os.Build
-import android.os.Handler
 import android.view.*
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
@@ -12,7 +11,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 import android.view.WindowManager
 import com.bing.example.R
-import com.blankj.utilcode.util.LogUtils
 
 class CountDownManager(val context: Context) {
         private val OVERLAY_TYPE: Int = if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1) {
@@ -45,9 +43,7 @@ class CountDownManager(val context: Context) {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
                                 val result = number - it!!
-                                LogUtils.i(":-----$result")
                                 if (result <= 0L) {
-                                        LogUtils.i(":-----callback")
                                         removeAllViews()
                                         callback()
                                         return@subscribe
@@ -59,7 +55,7 @@ class CountDownManager(val context: Context) {
                         }
         }
 
-        fun removeAllViews() {
+        private fun removeAllViews() {
                 viewList.forEach {
                         windowManager.removeViewImmediate(it)
                 }

@@ -15,7 +15,6 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.bing.example.R
 import com.bing.example.app.globalAudioConfig
 import com.bing.example.main.home.RecordHelper
-import com.blankj.utilcode.util.LogUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 
 class RecordActivity : Activity() {
@@ -23,7 +22,6 @@ class RecordActivity : Activity() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
                 super.onCreate(savedInstanceState)
-                LogUtils.i("------onCreate")
                 mMediaProjectionManager = getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
 
                 //1. 获取悬浮窗权限
@@ -37,27 +35,24 @@ class RecordActivity : Activity() {
         private fun getOverlayPermission() {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (!Settings.canDrawOverlays(this)) {
-                                val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                                intent.data = Uri.parse("package:$packageName");
-                                startActivityForResult(intent, REQUEST_OVERLAY_PERMISSIONS);
+                                val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+                                intent.data = Uri.parse("package:$packageName")
+                                startActivityForResult(intent, REQUEST_OVERLAY_PERMISSIONS)
                         }
                 }
         }
 
         private fun startCapture() {
-                LogUtils.i(":-----startCapture0")
                 val permissions = if (globalAudioConfig != null)
                         arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO)
                 else
                         arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 val disposable =
                         RxPermissions(this)
-                                .requestEach(*permissions).subscribe {
-                                        if (it.granted) {
-                                                LogUtils.i(":-----granted")
+                                .request(*permissions).subscribe {
+                                        if (it) {
                                                 startCaptureIntent()
                                         } else {
-                                                LogUtils.i(":-----notgranted")
                                                 showNeedRecordPermissionDialog(permissions)
                                         }
                                 }
@@ -69,14 +64,12 @@ class RecordActivity : Activity() {
         }
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-                LogUtils.i(":-----$requestCode, $resultCode")
                 if (requestCode == REQUEST_OVERLAY_PERMISSIONS
                         && resultCode == Activity.RESULT_OK
                         && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (!Settings.canDrawOverlays(this)) {
                                 showNeedOverlayDialog()
                         } else {
-                                LogUtils.i(":-----startCapture")
                                 startCapture()
                         }
                 }
@@ -84,7 +77,6 @@ class RecordActivity : Activity() {
                         val mediaProjection = mMediaProjectionManager.getMediaProjection(resultCode, data!!) ?: return
                         CountDownManager(this)
                                 .startCountDown(3) {
-                                        LogUtils.i(":-----startCapture2")
                                         RecordHelper.newRecorder(mediaProjection)
                                         finish()
                                  }

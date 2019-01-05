@@ -12,9 +12,7 @@ import com.bing.example.main.home.RecordState
 import com.bing.example.main.notification.NotificationDelegate
 import com.bing.example.utils.collapseStatusBar
 import com.blankj.utilcode.util.AppUtils
-import com.blankj.utilcode.util.LogUtils
 import org.jetbrains.anko.startActivity
-
 
 class RecordService : Service() {
 
@@ -22,7 +20,6 @@ class RecordService : Service() {
                 override fun onReceive(context: Context, intent: Intent) {
                         when (intent.action) {
                                 ACTION_RECORD -> {
-                                        LogUtils.i("-----ACTION_RECORD")
                                         collapseStatusBar(this@RecordService)
                                          if (RecordHelper.recordState == RecordState.NOT_RECORD) {
                                                 startActivity<RecordActivity>()
