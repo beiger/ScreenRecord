@@ -3,10 +3,8 @@ package com.bing.example.search
 import android.content.Intent
 import android.view.View
 import androidx.core.content.FileProvider
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.dinus.com.itemdecoration.GridOffsetsItemDecoration
 import cn.jzvd.JzvdStd
@@ -20,7 +18,11 @@ import com.bing.example.model.entity.VideoInfo
 import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.jakewharton.rxbinding2.widget.RxTextView
+import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.activity_search.*
 import java.io.File
+import java.util.concurrent.TimeUnit
 
 class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
         private val mRecyclerView: RecyclerView
@@ -31,6 +33,23 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
                 initRecycleView()
                 initAdapter()
                 addOnClickListener(mBinding.back, mBinding.ivSearch)
+                addDisposable(
+                        RxTextView.textChanges(searchText)
+                                .debounce(400, TimeUnit.MILLISECONDS)
+                                .subscribeOn(AndroidSchedulers.mainThread())
+//                                .filter{it.isNotEmpty()}
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe{ s ->
+                                        val result = mViewModel.videoInfos.filter {
+                                                if (s.isEmpty()) {
+                                                        false
+                                                } else {
+                                                        it.title?.contains(s) ?: false
+                                                }
+                                        }
+                                        mAdapter.updateData(result)
+                                }
+                )
         }
 
         override fun initViewModel() {
@@ -41,7 +60,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
                 return R.layout.activity_search
         }
 
-        fun initRecycleView() {
+        private fun initRecycleView() {
                 val offsetsItemDecoration = GridOffsetsItemDecoration(
                         GridOffsetsItemDecoration.GRID_OFFSETS_VERTICAL)
                 offsetsItemDecoration.setVerticalItemOffsets(SizeUtils.dp2px(8f))
@@ -50,7 +69,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
                 mRecyclerView.layoutManager = GridLayoutManager(this, 2)
         }
 
-        fun initAdapter() {
+        private fun initAdapter() {
                 mAdapter = VideosAdapter(object : VideosAdapter.OnClickListener {
                         override fun onClickImage(position: Int, videoInfo: VideoInfo) {
                                 val fileName = videoInfo.path
@@ -93,9 +112,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
                                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share_to)))
                         }
                 })
-                mViewModel.videoInfos.observe(this, Observer {
-                        mAdapter.updateData(it)
-                })
                 mRecyclerView.adapter = mAdapter
         }
 
@@ -106,5 +122,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
                         R.id.ivSearch -> {}
                 }
         }
+
+//        override fun finish() {
+//                super.finish()
+//                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+//        }
 
 }

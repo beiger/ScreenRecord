@@ -1,7 +1,5 @@
 package com.bing.example.model
 
-
-import com.bing.example.app.ScreenRecordApplication
 import com.bing.example.model.db.AppDatabase
 import com.bing.example.model.entity.VideoInfo
 
@@ -9,14 +7,14 @@ import androidx.lifecycle.LiveData
 import com.bing.mvvmbase.base.BaseApplication
 
 class RepositoryManager private constructor() {
-        private val mDatabase: AppDatabase
-
-        init {
-                mDatabase = AppDatabase.getInstance(BaseApplication.sContext)
-        }
+        private val mDatabase: AppDatabase = AppDatabase.getInstance(BaseApplication.sContext)
 
         fun loadVideosLiveData(): LiveData<List<VideoInfo>> {
                 return mDatabase.videoDao().loadAllVideosLiveData()
+        }
+
+        fun loadVideos(): List<VideoInfo> {
+                return mDatabase.videoDao().loadAllVideos()
         }
 
         fun insertVideo(videoInfo: VideoInfo) {

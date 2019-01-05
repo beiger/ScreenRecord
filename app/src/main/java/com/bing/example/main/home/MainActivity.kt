@@ -240,6 +240,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
                         R.id.searchText, R.id.ivSearch -> {
                                 startActivity<SearchActivity>()
+//                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                         }
 
                         R.id.record -> onRecordButtonClick()

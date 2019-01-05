@@ -12,7 +12,13 @@ class VideoEditAdapter(listenerTemp: OnClickListener): BaseRecycleViewAdapter<Vi
                 listener = listenerTemp
         }
         override fun bindData(holder: VideoEditViewHolder, position: Int) {
-
+                val binding = holder.binding
+                when (data!![position].name) {
+                        "jianqie" -> {
+                                binding.tvEdit.text = binding.root.context.getText(R.string.jianqie)
+                                binding.ivEdit.setImageResource(R.drawable.ic_jianqie)
+                        }
+                }
         }
 
         override fun createHolder(parent: ViewGroup, viewType: Int): VideoEditViewHolder {

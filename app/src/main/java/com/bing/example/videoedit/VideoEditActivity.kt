@@ -1,5 +1,8 @@
 package com.bing.example.videoedit
 
+import android.os.Bundle
+import android.os.PersistableBundle
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProviders
@@ -22,6 +25,7 @@ class VideoEditActivity : BaseRecycleViewActivity<ActivityVideoEditBinding, Base
                         temp.value = list
                         return temp
                 }
+
         override val layoutManager: RecyclerView.LayoutManager
                 get() = GridLayoutManager(this, 2)
         override val networkState: LiveData<Status>
@@ -36,7 +40,7 @@ class VideoEditActivity : BaseRecycleViewActivity<ActivityVideoEditBinding, Base
         override fun initAdapter() {
                 mAdapter = VideoEditAdapter(object : BaseRecycleViewAdapter.OnClickListener {
                         override fun onClick(position: Int) {
-                                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
                         }
                 })
         }
@@ -55,6 +59,18 @@ class VideoEditActivity : BaseRecycleViewActivity<ActivityVideoEditBinding, Base
 
         override fun refresh(refreshLayout: RefreshLayout) {
 
+        }
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+                super.onCreate(savedInstanceState)
+                addOnClickListener(mBinding.back)
+        }
+
+        override fun onClick(v: View) {
+                super.onClick(v)
+                when (v.id) {
+                        R.id.back -> finish()
+                }
         }
 
 }

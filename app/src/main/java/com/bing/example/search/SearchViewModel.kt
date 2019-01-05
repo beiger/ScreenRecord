@@ -12,7 +12,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class SearchViewModel(application: Application) : BaseViewModel(application) {
-        val videoInfos: LiveData<List<VideoInfo>> = RepositoryManager.instance().loadVideosLiveData()
+        val videoInfos: List<VideoInfo> = RepositoryManager.instance().loadVideos()
+        val result: LiveData<List<VideoInfo>> = MutableLiveData()
         val loadStatus: MutableLiveData<Status> = MutableLiveData()
 
         init {
