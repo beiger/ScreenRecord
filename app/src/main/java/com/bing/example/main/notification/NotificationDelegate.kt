@@ -7,14 +7,15 @@ import com.bing.example.module.screenRecord.Notifications
 import android.app.NotificationChannel
 import android.os.Build.VERSION_CODES.O
 import android.os.Build
+import com.bing.mvvmbase.base.BaseApplication
 
-class NotificationDelegate(val context: Context) : ContextWrapper(context) {
+object NotificationDelegate {
         val id = 0x1fff
        private val CHANNEL_ID = "Screen Recorder"
         private val CHANNEL_NAME = "Screen Recorder Notifications"
 
         private val mManager: NotificationManager by lazy {
-                val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                val manager = BaseApplication.sContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                 if (Build.VERSION.SDK_INT >= O) {
                         val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW)
                         channel.setShowBadge(false)
@@ -23,8 +24,8 @@ class NotificationDelegate(val context: Context) : ContextWrapper(context) {
                 manager
         }
 
-        private val notifications: Notifications = Notifications(context, mManager, id, CHANNEL_ID);
-        val globalNotification = GlobalNotification(context, mManager, id, CHANNEL_ID);
+        private val notifications: Notifications = Notifications(BaseApplication.sContext, mManager, id, CHANNEL_ID);
+        val globalNotification = GlobalNotification(BaseApplication.sContext, mManager, id, CHANNEL_ID);
 
         fun recording(timeMs: Long) {
                 notifications.recording(timeMs)

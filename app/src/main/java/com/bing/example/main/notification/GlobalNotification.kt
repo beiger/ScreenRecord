@@ -13,9 +13,9 @@ import com.bing.example.R
 import com.bing.mvvmbase.base.BaseApplication
 
 import android.os.Build.VERSION_CODES.O
-import com.bing.example.main.home.MainActivity.Companion.ACTION_EXIT_APP
-import com.bing.example.main.home.MainActivity.Companion.ACTION_RECORD
-import com.bing.example.main.home.MainActivity.Companion.ACTION_VIDEO_LIST
+import com.bing.example.main.service.RecordService.Companion.ACTION_EXIT_APP
+import com.bing.example.main.service.RecordService.Companion.ACTION_RECORD
+import com.bing.example.main.service.RecordService.Companion.ACTION_VIDEO_LIST
 
 class GlobalNotification(context: Context, val manager: NotificationManager, val notificationID: Int, val channelID: String) : ContextWrapper(context) {
 

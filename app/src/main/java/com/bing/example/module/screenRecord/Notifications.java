@@ -16,7 +16,7 @@ import com.bing.mvvmbase.base.BaseApplication;
 import com.blankj.utilcode.util.LogUtils;
 
 import static android.os.Build.VERSION_CODES.O;
-import static com.bing.example.main.home.RecordHelper.ACTION_STOP;
+import static com.bing.example.main.service.RecordService.ACTION_STOP;
 
 public class Notifications extends ContextWrapper {
         private long mLastFiredTime = 0;
