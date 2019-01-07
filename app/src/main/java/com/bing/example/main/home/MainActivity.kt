@@ -175,7 +175,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 if (mVideoListFragment.onBackPressed()) {
                         return
                 }
-                moveTaskToBack(false)
+                super.onBackPressed()
         }
 
         override fun onPause() {

@@ -21,19 +21,19 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="52dp"
             android:background="@color/accent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:contentInsetStart="4dp"
-            app:contentInsetEnd="4dp"
+            app:contentInsetStart="6dp"
+            app:contentInsetEnd="6dp"
             android:elevation="4dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/toolbar_multi"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="52dp"
                 android:visibility="@{!isNormalMode ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -76,16 +76,16 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="42dp"
                 android:layout_gravity="center"
                 android:background="@drawable/bg_search_view"
                 android:visibility="@{isNormalMode ? View.VISIBLE : View.GONE}">
 
                 <ImageView
                     android:id="@+id/menu"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="12dp"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:padding="10dp"
                     android:src="@drawable/ic_menu"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -105,9 +105,9 @@
 
                 <ImageView
                     android:id="@+id/ivSearch"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="12dp"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:padding="10dp"
                     android:src="@drawable/ic_search2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

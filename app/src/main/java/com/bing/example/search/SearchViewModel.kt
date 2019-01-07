@@ -20,16 +20,6 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
                 loadStatus.value = Status.SUCCESS
         }
 
-        fun deleteVideos(infos: List<VideoInfo>) {
-                AppExecutors.diskIO.execute {
-                        RepositoryManager.instance().deleteVideo(infos)
-                        for (i in infos.indices) {
-                                FileUtils.deleteFile(infos[i].path)
-                                FileUtils.deleteFile(infos[i].imagePath)
-                        }
-                }
-        }
-
         fun deleteVideo(info: VideoInfo) {
                 AppExecutors.diskIO.execute {
                         RepositoryManager.instance().deleteVideo(info)

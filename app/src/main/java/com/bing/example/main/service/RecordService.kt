@@ -39,6 +39,7 @@ class RecordService : Service() {
                                 ACTION_EXIT_APP -> {
                                         NotificationDelegate.clearAll()
                                         collapseStatusBar(this@RecordService)
+                                        stopSelf()
                                         AppUtils.exitApp()
                                 }
                                 ACTION_STOP -> {
