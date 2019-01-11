@@ -63,4 +63,5 @@
 	<string name="search">搜索</string>
 	<string name="video_edit">视频编辑</string>
 	<string name="jianqie">视频编辑</string>
+	<string name="need_overlay_permission">屏幕录制需要悬浮窗权限</string>
 </resources>

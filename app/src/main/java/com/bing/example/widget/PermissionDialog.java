@@ -48,7 +48,7 @@ public class PermissionDialog extends DialogFragment {
 		return new AlertDialog.Builder(getContext())
 				.setView(view)
 				.setNegativeButton(android.R.string.cancel, null)
-				.setPositiveButton(R.string.open_permission, (DialogInterface.OnClickListener) (dialog, which) -> toSelfSetting(getContext())).create();
+				.setPositiveButton(R.string.open_permission, (dialog, which) -> toSelfSetting(getContext())).create();
 	}
 
 	public static void toSelfSetting(Context context) {

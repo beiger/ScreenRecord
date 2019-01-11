@@ -1,20 +1,22 @@
 package com.bing.example.main.service
 
 import android.Manifest
-import android.annotation.TargetApi
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.PermissionInfo
 import android.media.projection.MediaProjectionManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import com.afollestad.materialdialogs.MaterialDialog
 import com.bing.example.R
 import com.bing.example.app.globalAudioConfig
 import com.bing.example.main.home.RecordHelper
 import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.ToastUtils
+import com.tbruyelle.rxpermissions2.RxPermissions
 
 class RecordActivity : Activity() {
         private lateinit var mMediaProjectionManager: MediaProjectionManager
@@ -23,60 +25,42 @@ class RecordActivity : Activity() {
                 super.onCreate(savedInstanceState)
                 LogUtils.i("------onCreate")
                 mMediaProjectionManager = getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-                when {
-                        hasPermissions() -> startCaptureIntent()
-                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> requestPermissions()
-                        else -> ToastUtils.showShort("No permission to write sd card")
+
+                //1. 获取悬浮窗权限
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
+                        getOverlayPermission()
+                } else {
+                        startCapture()
                 }
         }
 
-        @TargetApi(Build.VERSION_CODES.M)
-        private fun requestPermissions() {
+        private fun getOverlayPermission() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (!Settings.canDrawOverlays(this)) {
+                                val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                                intent.data = Uri.parse("package:$packageName");
+                                startActivityForResult(intent, REQUEST_OVERLAY_PERMISSIONS);
+                        }
+                }
+        }
+
+        private fun startCapture() {
+                LogUtils.i(":-----startCapture0")
                 val permissions = if (globalAudioConfig != null)
                         arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO)
                 else
                         arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                var showRationale = false
-                for (perm in permissions) {
-                        showRationale = showRationale or shouldShowRequestPermissionRationale(perm)
-                }
-                if (!showRationale) {
-                        requestPermissions(permissions, REQUEST_PERMISSIONS)
-                        return
-                }
-                AlertDialog.Builder(this)
-                        .setMessage(R.string.request_permission)
-                        .setCancelable(false)
-                        .setPositiveButton(android.R.string.ok) { _, _ -> requestPermissions(permissions, REQUEST_PERMISSIONS) }
-                        .setNegativeButton(android.R.string.cancel) {_, _ -> finish()}
-                        .create()
-                        .show()
-        }
-
-        private fun hasPermissions(): Boolean {
-                val pm = packageManager
-                val packageName = packageName
-                val granted = (if (globalAudioConfig != null) {
-                        pm.checkPermission(Manifest.permission.RECORD_AUDIO, packageName)
-                } else {
-                        PackageManager.PERMISSION_GRANTED
-                }) or pm.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, packageName)
-                return granted == PackageManager.PERMISSION_GRANTED
-        }
-
-        override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-                if (requestCode == REQUEST_PERMISSIONS) {
-                        var granted = PackageManager.PERMISSION_GRANTED
-                        for (r in grantResults) {
-                                granted = granted or r
-                        }
-                        if (granted == PackageManager.PERMISSION_GRANTED) {
-                                startCaptureIntent()
-                        } else {
-                                ToastUtils.showShort(getString(R.string.no_permission))
-                                finish()
-                        }
-                }
+                val disposable =
+                        RxPermissions(this)
+                                .requestEach(*permissions).subscribe {
+                                        if (it.granted) {
+                                                LogUtils.i(":-----granted")
+                                                startCaptureIntent()
+                                        } else {
+                                                LogUtils.i(":-----notgranted")
+                                                showNeedRecordPermissionDialog(permissions)
+                                        }
+                                }
         }
 
         private fun startCaptureIntent() {
@@ -85,16 +69,88 @@ class RecordActivity : Activity() {
         }
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+                LogUtils.i(":-----$requestCode, $resultCode")
+                if (requestCode == REQUEST_OVERLAY_PERMISSIONS
+                        && resultCode == Activity.RESULT_OK
+                        && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (!Settings.canDrawOverlays(this)) {
+                                showNeedOverlayDialog()
+                        } else {
+                                LogUtils.i(":-----startCapture")
+                                startCapture()
+                        }
+                }
                 if (requestCode == REQUEST_MEDIA_PROJECTION && resultCode == Activity.RESULT_OK) {
                         val mediaProjection = mMediaProjectionManager.getMediaProjection(resultCode, data!!) ?: return
-
-                        RecordHelper.newRecorder(mediaProjection)
+                        CountDownManager(this)
+                                .startCountDown(3) {
+                                        LogUtils.i(":-----startCapture2")
+                                        RecordHelper.newRecorder(mediaProjection)
+                                        finish()
+                                 }
                 }
-                finish()
+        }
+
+        private fun showNeedOverlayDialog() {
+                MaterialDialog(this)
+                        .message(R.string.need_overlay_permission)
+                        .positiveButton(android.R.string.ok) {
+                                getOverlayPermission()
+                        }.negativeButton(android.R.string.cancel) {
+                                finish()
+                        }
+        }
+
+        private fun showNeedRecordPermissionDialog(permissions: Array<String>) {
+                MaterialDialog(this)
+                        .message(text = getPermissionsString(permissions))
+                        .positiveButton(android.R.string.ok) {
+                                toSelfSetting(this)
+                        }.negativeButton(android.R.string.cancel) {
+                                finish()
+                        }
+        }
+
+        private fun toSelfSetting(context: Context) {
+                val mIntent = Intent()
+                mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                mIntent.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
+                mIntent.data = Uri.fromParts("package", context.packageName, null)
+                context.startActivity(mIntent)
+        }
+
+
+        private fun getPermissionsString(permissions: Array<String>?): String {
+                if (permissions == null || permissions.isEmpty()) {
+                        return ""
+                }
+                val result = StringBuilder()
+                result.append(getString(R.string.need_permisson) + ":\n")
+                for (i in permissions.indices) {
+                        if (i < permissions.size - 1) {
+                                result.append("· ").append(getPermissionGroupLabel(permissions[i])).append("\n")
+                        } else {
+                                result.append("· ").append(getPermissionGroupLabel(permissions[i]))
+                        }
+                }
+                return result.toString()
+        }
+
+        private fun getPermissionGroupLabel(permissionName: String): String? {
+                var label: String? = null
+                try {
+                        val permissionInfo: PermissionInfo = packageManager.getPermissionInfo(permissionName, 0)
+                        val groupInfo = packageManager.getPermissionGroupInfo(permissionInfo.group, 0)
+                        label = groupInfo.loadLabel(packageManager).toString()
+                } catch (e: PackageManager.NameNotFoundException) {
+                        e.printStackTrace()
+                }
+
+                return label
         }
 
         companion object {
                 const val REQUEST_MEDIA_PROJECTION = 1
-                const val REQUEST_PERMISSIONS = 2
+                const val REQUEST_OVERLAY_PERMISSIONS = 3
         }
 }
