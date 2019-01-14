@@ -40,8 +40,12 @@ enum class EditType {
                         return R.string.fgh_text_loading
                 }
 
+                override fun subDesText(): Int {
+                        return R.string.fgh_text_loading
+                }
+
                 override fun colorRes(): Int {
-                        return R.color.color11
+                        return R.color.color17
                 }
         },
         SHANCHU {
@@ -53,8 +57,12 @@ enum class EditType {
                         return R.string.fgh_text_loading
                 }
 
+                override fun subDesText(): Int {
+                        return R.string.fgh_text_loading
+                }
+
                 override fun colorRes(): Int {
-                        return R.color.color11
+                        return R.color.color20
                 }
         },
         BEIJING {
@@ -66,12 +74,17 @@ enum class EditType {
                         return R.string.fgh_text_loading
                 }
 
+                override fun subDesText(): Int {
+                        return R.string.fgh_text_loading
+                }
+
                 override fun colorRes(): Int {
-                        return R.color.color11
+                        return R.color.color18
                 }
         };
 
         abstract fun imgRes(): Int
         abstract fun desText(): Int
+        abstract fun subDesText(): Int
         abstract fun colorRes(): Int
 }

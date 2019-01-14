@@ -132,13 +132,8 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:2.0.0-rc5' //dialog
     implementation 'com.afollestad.material-dialogs:input:2.0.0-rc5' //dialog
     implementation 'com.github.Jay-Goo:RangeSeekBar:v2.0.4'
-<<<<<<< HEAD
-    implementation 'com.beardedhen:androidbootstrap:2.3.1'
-    implementation 'com.github.clans:fab:1.6.4'
-=======
     implementation 'com.beardedhen:androidbootstrap:2.3.2'
     implementation 'com.nightonke:boommenu:2.1.1'
->>>>>>> video edit
 
     //图标
     implementation 'com.mikepenz:fontawesome-typeface:5.0.6.0@aar'
@@ -146,9 +141,12 @@ dependencies {
     // 权限
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
 
-    // 图片选择
+    // 图片加载
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
+
+    // 图片选择
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
 
     // 视频播放
     implementation 'cn.jzvd:jiaozivideoplayer:6.3.1'

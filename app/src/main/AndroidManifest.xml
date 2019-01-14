@@ -5,9 +5,10 @@
     <uses-permission android:name="android.permission.REORDER_TASKS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACTION_OPEN_DOCUMENT" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- <uses-permission android:name="android.permission.GET_TASKS" /> -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
 
     <application
@@ -19,7 +20,9 @@
         android:supportsRtl="true"
         android:textAllCaps="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".videoedit.OneVideoEditActivity"></activity>
+        <activity android:name=".videoedit.OneVideoEditActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".main.service.RecordActivity"
             android:launchMode="singleInstance"
