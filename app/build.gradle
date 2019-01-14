@@ -132,8 +132,13 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:2.0.0-rc5' //dialog
     implementation 'com.afollestad.material-dialogs:input:2.0.0-rc5' //dialog
     implementation 'com.github.Jay-Goo:RangeSeekBar:v2.0.4'
+<<<<<<< HEAD
     implementation 'com.beardedhen:androidbootstrap:2.3.1'
     implementation 'com.github.clans:fab:1.6.4'
+=======
+    implementation 'com.beardedhen:androidbootstrap:2.3.2'
+    implementation 'com.nightonke:boommenu:2.1.1'
+>>>>>>> video edit
 
     //图标
     implementation 'com.mikepenz:fontawesome-typeface:5.0.6.0@aar'

@@ -3,6 +3,7 @@ package com.bing.example.videoedit
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.bing.example.BR
+import com.bing.example.R
 import com.bing.example.utils.Constant
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,7 +31,47 @@ class EditInfo(originVideoPath: String, editType: EditType? = null): BaseObserva
 }
 
 enum class EditType {
-        JIANQIE,
-        SHANCHU,
-        BEIJING,
+        JIANQIE {
+                override fun imgRes(): Int {
+                        return R.drawable.ic_about
+                }
+
+                override fun desText(): Int {
+                        return R.string.fgh_text_loading
+                }
+
+                override fun colorRes(): Int {
+                        return R.color.color11
+                }
+        },
+        SHANCHU {
+                override fun imgRes(): Int {
+                        return R.drawable.ic_about
+                }
+
+                override fun desText(): Int {
+                        return R.string.fgh_text_loading
+                }
+
+                override fun colorRes(): Int {
+                        return R.color.color11
+                }
+        },
+        BEIJING {
+                override fun imgRes(): Int {
+                        return R.drawable.ic_about
+                }
+
+                override fun desText(): Int {
+                        return R.string.fgh_text_loading
+                }
+
+                override fun colorRes(): Int {
+                        return R.color.color11
+                }
+        };
+
+        abstract fun imgRes(): Int
+        abstract fun desText(): Int
+        abstract fun colorRes(): Int
 }

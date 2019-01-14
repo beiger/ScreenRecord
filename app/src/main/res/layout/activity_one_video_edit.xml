@@ -27,14 +27,51 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent">
 
-			<ImageView
-				android:id="@+id/back"
-				android:layout_width="48dp"
-				android:layout_height="48dp"
-				android:background="?android:selectableItemBackground"
-				android:scaleType="centerInside"
-				android:src="@drawable/ic_arrow_back_white" />
+			<androidx.constraintlayout.widget.ConstraintLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
 
+				<ImageView
+					android:id="@+id/back"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					android:background="?android:selectableItemBackground"
+					android:scaleType="centerInside"
+					android:src="@drawable/ic_arrow_back_white"
+					app:layout_constraintBottom_toBottomOf="@+id/bmb"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent" />
+
+				<TextView
+					android:id="@+id/toolbar_title"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:gravity="center"
+					android:text="@string/video_edit"
+					android:textColor="@color/white"
+					android:textSize="18sp"
+					android:typeface="sans"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintStart_toEndOf="@+id/bmb"
+					app:layout_constraintTop_toTopOf="parent" />
+
+				<com.nightonke.boommenu.BoomMenuButton
+					android:id="@+id/bmb"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					app:bmb_backgroundEffect="false"
+					app:bmb_boomEnum="boomLine"
+					app:bmb_buttonEnum="textInsideCircle"
+					app:bmb_buttonPlaceEnum="buttonPlace_sc_3_1"
+					app:bmb_piecePlaceEnum="piecePlace_dot_3_1"
+					app:bmb_showDuration="200"
+					app:bmb_hideDuration="200" />
+			</androidx.constraintlayout.widget.ConstraintLayout>
+
+<<<<<<< HEAD
 			<TextView
 				android:id="@+id/toolbar_title"
 				android:layout_width="wrap_content"
@@ -45,6 +82,8 @@
 				android:textSize="18sp"
 				android:typeface="sans" />
 
+=======
+>>>>>>> video edit
 		</androidx.appcompat.widget.Toolbar>
 
 		<LinearLayout
@@ -118,6 +157,7 @@
 			app:layout_constraintBottom_toTopOf="@+id/rangeSeekBar"
 			app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
+<<<<<<< HEAD
 
         <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/menu"
@@ -137,5 +177,7 @@
             fab:menu_openDirection="up"
             fab:menu_colorNormal="@color/accent"/>
 
+=======
+>>>>>>> video edit
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
