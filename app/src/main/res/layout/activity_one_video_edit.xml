@@ -71,27 +71,13 @@
 			</androidx.constraintlayout.widget.ConstraintLayout>
 		</androidx.appcompat.widget.Toolbar>
 
-		<LinearLayout
-			android:id="@+id/linearLayout2"
+		<FrameLayout
+			android:id="@+id/operationContainer"
 			android:layout_width="match_parent"
-			android:layout_height="40dp"
-			android:layout_margin="16dp"
-			android:visibility="gone"
-			app:layout_constraintBottom_toBottomOf="parent"
-			tools:layout_editor_absoluteX="16dp">
+			android:layout_height="132dp"
+			app:layout_constraintBottom_toBottomOf="parent">
 
-			<com.beardedhen.androidbootstrap.BootstrapButton
-				android:layout_width="wrap_content"
-				android:layout_height="40dp"
-				android:layout_weight="1"
-				android:gravity="center"
-				android:text="BootstrapButton"
-				app:bootstrapBrand="success"
-				app:bootstrapSize="lg"
-				app:buttonMode="regular"
-				app:roundedCorners="true"
-				app:showOutline="false" />
-
+<<<<<<< HEAD
 			<com.beardedhen.androidbootstrap.BootstrapButton
 				android:layout_width="wrap_content"
 				android:layout_height="40dp"
@@ -123,24 +109,18 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:roundedCorners="true"
 			app:showOutline="false" />
+=======
+			<include layout="@layout/edit_type_null"/>
+>>>>>>> video edit
 
-		<com.jaygoo.widget.RangeSeekBar
-			android:id="@+id/rangeSeekBar"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="8dp"
-			android:layout_marginEnd="8dp"
-			android:layout_marginBottom="88dp"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent" />
+		</FrameLayout>
 
 		<cn.jzvd.JzvdStd
 			android:id="@+id/videoPlayer"
 			android:layout_width="match_parent"
 			android:layout_height="0dp"
-			android:layout_marginBottom="32dp"
-			app:layout_constraintBottom_toTopOf="@+id/rangeSeekBar"
+			android:layout_marginBottom="0dp"
+			app:layout_constraintBottom_toTopOf="@+id/operationContainer"
 			app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

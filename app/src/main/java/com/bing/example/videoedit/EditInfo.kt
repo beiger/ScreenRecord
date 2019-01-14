@@ -9,10 +9,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class EditInfo(originVideoPath: String, editType: EditType? = null): BaseObservable() {
-        private val originVideoPath: String = originVideoPath
+        val originVideoPath: String = originVideoPath
 
         @Bindable
-        private var editType: EditType? = editType
+        var editType: EditType? = editType
         set(value) {
                 field = value
                 notifyPropertyChanged(BR.editType)
@@ -31,13 +31,17 @@ class EditInfo(originVideoPath: String, editType: EditType? = null): BaseObserva
 }
 
 enum class EditType {
-        JIANQIE {
+        CLIP {
                 override fun imgRes(): Int {
-                        return R.drawable.ic_about
+                        return R.drawable.abc_ic_clear_material
                 }
 
                 override fun desText(): Int {
-                        return R.string.fgh_text_loading
+                        return R.string.clip
+                }
+
+                override fun subDesText(): Int {
+                        return R.string.choose_video_to_save
                 }
 
                 override fun subDesText(): Int {
@@ -48,13 +52,17 @@ enum class EditType {
                         return R.color.color17
                 }
         },
-        SHANCHU {
+        DELETE {
                 override fun imgRes(): Int {
                         return R.drawable.ic_about
                 }
 
                 override fun desText(): Int {
-                        return R.string.fgh_text_loading
+                        return R.string.delete
+                }
+
+                override fun subDesText(): Int {
+                        return R.string.choose_video_to_delete
                 }
 
                 override fun subDesText(): Int {
@@ -65,13 +73,17 @@ enum class EditType {
                         return R.color.color20
                 }
         },
-        BEIJING {
+        BACKGROUND {
                 override fun imgRes(): Int {
                         return R.drawable.ic_about
                 }
 
                 override fun desText(): Int {
-                        return R.string.fgh_text_loading
+                        return R.string.background
+                }
+
+                override fun subDesText(): Int {
+                        return R.string.choose_img_as_bg
                 }
 
                 override fun subDesText(): Int {
