@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -110,4 +111,123 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+=======
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="editInfo"
+			type="com.bing.example.videoedit.EditInfo" />
+	</data>
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:context=".videoedit.OneVideoEditActivity">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="48dp"
+			android:background="@color/accent"
+			android:elevation="4dp"
+			app:contentInsetStart="0dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent">
+
+			<ImageView
+				android:id="@+id/back"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:background="?android:selectableItemBackground"
+				android:scaleType="centerInside"
+				android:src="@drawable/ic_arrow_back_white" />
+
+			<TextView
+				android:id="@+id/toolbar_title"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:gravity="center"
+				android:text="@string/video_edit"
+				android:textColor="@color/white"
+				android:textSize="18sp"
+				android:typeface="sans" />
+		</androidx.appcompat.widget.Toolbar>
+
+		<LinearLayout
+			android:id="@+id/linearLayout2"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:layout_margin="16dp"
+			android:visibility="gone"
+			app:layout_constraintBottom_toBottomOf="parent"
+			tools:layout_editor_absoluteX="16dp">
+
+			<com.beardedhen.androidbootstrap.BootstrapButton
+				android:layout_width="wrap_content"
+				android:layout_height="40dp"
+				android:layout_weight="1"
+				android:gravity="center"
+				android:text="BootstrapButton"
+				app:bootstrapBrand="success"
+				app:bootstrapSize="lg"
+				app:buttonMode="regular"
+				app:roundedCorners="true"
+				app:showOutline="false" />
+
+			<com.beardedhen.androidbootstrap.BootstrapButton
+				android:layout_width="wrap_content"
+				android:layout_height="40dp"
+				android:layout_marginStart="24dp"
+				android:layout_weight="1"
+				android:gravity="center"
+				android:text="BootstrapButton"
+				app:bootstrapBrand="success"
+				app:bootstrapSize="lg"
+				app:buttonMode="regular"
+				app:roundedCorners="true"
+				app:showOutline="false" />
+		</LinearLayout>
+
+		<com.beardedhen.androidbootstrap.BootstrapButton
+			android:layout_width="0dp"
+			android:layout_height="40dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginEnd="16dp"
+			android:layout_marginBottom="16dp"
+			android:gravity="center"
+			android:text="剪切"
+			android:visibility="visible"
+			app:bootstrapBrand="success"
+			app:bootstrapSize="lg"
+			app:buttonMode="regular"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:roundedCorners="true"
+			app:showOutline="false" />
+
+		<com.jaygoo.widget.RangeSeekBar
+			android:id="@+id/rangeSeekBar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="8dp"
+			android:layout_marginEnd="8dp"
+			android:layout_marginBottom="88dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent" />
+
+		<cn.jzvd.JzvdStd
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_marginBottom="32dp"
+			app:layout_constraintBottom_toTopOf="@+id/rangeSeekBar"
+			app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> video edit
 </layout>
