@@ -29,7 +29,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 class ToolsActivity : BaseRecycleViewActivity<ActivityVideoEditBinding, BaseViewModel, VideoEditAdapter, VideoEditType>() {
         override val data: LiveData<List<VideoEditType>>
                 get() {
-                        val list = listOf(VideoEditType("shipinbianji"))
+                        val list = listOf(VideoEditType(ToolsType.VIDEO_EDIT))
                         val temp = MutableLiveData<List<VideoEditType>>()
                         temp.value = list
                         return temp

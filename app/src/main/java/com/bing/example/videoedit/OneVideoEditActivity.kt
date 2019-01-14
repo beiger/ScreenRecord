@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bing.example.R
 import com.bing.mvvmbase.base.BaseActivity
@@ -41,7 +43,15 @@ class OneVideoEditActivity : BaseActivity<ActivityOneVideoEditBinding, OneVideoE
         override fun initViewModel() {
                 mViewModel = ViewModelProviders.of(this).get(OneVideoEditViewModel::class.java)
                 val videoPath = intent.getStringExtra(TAG_VIDEO_PATH)
-                mViewModel.editInfo = EditInfo(videoPath?: "")
+                mViewModel.editInfo = EditInfo(videoPath)
+                mViewModel.initVideoLength()
+                mViewModel.videoLength.observe(this, Observer { length ->
+                        opViews.forEach {
+                                it?.let {
+                                        it.findViewById<TextView>(R.id.endTime).text = length.toString()
+                                }
+                        }
+                })
                 mBinding.videoPlayer.setUp(videoPath, "", Jzvd.SCREEN_WINDOW_NORMAL)
                 mBinding.videoPlayer.thumbImageView.setImageBitmap(BitmapUtil.createVideoThumbnailLocal(videoPath, 1))
         }
@@ -88,6 +98,9 @@ class OneVideoEditActivity : BaseActivity<ActivityOneVideoEditBinding, OneVideoE
                                         view.findViewById<RangeSeekBar>(R.id.rangeSeekBar).setOnRangeChangedListener(onRangeChangedListener)
                                         opViews[0] = view
                                 }
+                                with(opViews[0]!!.findViewById<RangeSeekBar>(R.id.rangeSeekBar)) {
+                                        setValue(0f, maxProgress)
+                                }
                                 operationContainer.removeAllViews()
                                 operationContainer.addView(opViews[0])
                         }
@@ -103,6 +116,9 @@ class OneVideoEditActivity : BaseActivity<ActivityOneVideoEditBinding, OneVideoE
                                         }
                                         view.findViewById<RangeSeekBar>(R.id.rangeSeekBar).setOnRangeChangedListener(onRangeChangedListener)
                                         opViews[1] = view
+                                }
+                                with(opViews[1]!!.findViewById<RangeSeekBar>(R.id.rangeSeekBar)) {
+                                        setValue(0f, maxProgress)
                                 }
                                 operationContainer.removeAllViews()
                                 operationContainer.addView(opViews[1])
@@ -122,6 +138,9 @@ class OneVideoEditActivity : BaseActivity<ActivityOneVideoEditBinding, OneVideoE
                                         }
                                         view.findViewById<RangeSeekBar>(R.id.rangeSeekBar).setOnRangeChangedListener(onRangeChangedListener)
                                         opViews[2] = view
+                                }
+                                with(opViews[2]!!.findViewById<RangeSeekBar>(R.id.rangeSeekBar)) {
+                                        setValue(0f, maxProgress)
                                 }
                                 operationContainer.removeAllViews()
                                 operationContainer.addView(opViews[2])

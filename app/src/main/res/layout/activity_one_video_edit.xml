@@ -74,44 +74,10 @@
 		<FrameLayout
 			android:id="@+id/operationContainer"
 			android:layout_width="match_parent"
-			android:layout_height="132dp"
+			android:layout_height="148dp"
 			app:layout_constraintBottom_toBottomOf="parent">
 
-<<<<<<< HEAD
-			<com.beardedhen.androidbootstrap.BootstrapButton
-				android:layout_width="wrap_content"
-				android:layout_height="40dp"
-				android:layout_marginStart="24dp"
-				android:layout_weight="1"
-				android:gravity="center"
-				android:text="BootstrapButton"
-				app:bootstrapBrand="success"
-				app:bootstrapSize="lg"
-				app:buttonMode="regular"
-				app:roundedCorners="true"
-				app:showOutline="false" />
-		</LinearLayout>
-
-		<com.beardedhen.androidbootstrap.BootstrapButton
-			android:layout_width="0dp"
-			android:layout_height="40dp"
-			android:layout_marginStart="24dp"
-			android:layout_marginEnd="24dp"
-			android:layout_marginBottom="16dp"
-			android:gravity="center"
-			android:text="剪切"
-			android:visibility="visible"
-			app:bootstrapBrand="success"
-			app:bootstrapSize="lg"
-			app:buttonMode="regular"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:roundedCorners="true"
-			app:showOutline="false" />
-=======
 			<include layout="@layout/edit_type_null"/>
->>>>>>> video edit
 
 		</FrameLayout>
 

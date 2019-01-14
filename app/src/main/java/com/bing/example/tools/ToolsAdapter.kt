@@ -13,8 +13,8 @@ class VideoEditAdapter(listenerTemp: OnClickListener): BaseRecycleViewAdapter<Vi
         }
         override fun bindData(holder: VideoEditViewHolder, position: Int) {
                 val binding = holder.binding
-                when (data!![position].name) {
-                        "shipinbianji" -> {
+                when (data!![position].type) {
+                        ToolsType.VIDEO_EDIT -> {
                                 binding.tvEdit.text = binding.root.context.getText(R.string.jianqie)
                                 binding.ivEdit.setImageResource(R.drawable.ic_jianqie)
                         }
@@ -29,13 +29,17 @@ class VideoEditAdapter(listenerTemp: OnClickListener): BaseRecycleViewAdapter<Vi
 
 class VideoEditViewHolder(binding: ItemVideoEditBinding): BaseViewHolder<ItemVideoEditBinding>(binding)
 
-class VideoEditType(val name: String): IsSame {
+class VideoEditType(val type: ToolsType): IsSame {
         override fun contentSame(obj: IsSame): Boolean {
-                return name == (obj as VideoEditType).name
+                return type == (obj as VideoEditType).type
         }
 
         override fun itemSame(obj: IsSame): Boolean {
-                return name == (obj as VideoEditType).name
+                return type == (obj as VideoEditType).type
         }
 
+}
+
+enum class ToolsType {
+        VIDEO_EDIT,
 }

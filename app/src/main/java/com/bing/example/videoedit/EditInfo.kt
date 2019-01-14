@@ -8,8 +8,7 @@ import com.bing.example.utils.Constant
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EditInfo(originVideoPath: String, editType: EditType? = null): BaseObservable() {
-        val originVideoPath: String = originVideoPath
+class EditInfo(val originVideoPath: String, editType: EditType? = null): BaseObservable() {
 
         @Bindable
         var editType: EditType? = editType
@@ -44,10 +43,6 @@ enum class EditType {
                         return R.string.choose_video_to_save
                 }
 
-                override fun subDesText(): Int {
-                        return R.string.fgh_text_loading
-                }
-
                 override fun colorRes(): Int {
                         return R.color.color17
                 }
@@ -65,10 +60,6 @@ enum class EditType {
                         return R.string.choose_video_to_delete
                 }
 
-                override fun subDesText(): Int {
-                        return R.string.fgh_text_loading
-                }
-
                 override fun colorRes(): Int {
                         return R.color.color20
                 }
@@ -84,10 +75,6 @@ enum class EditType {
 
                 override fun subDesText(): Int {
                         return R.string.choose_img_as_bg
-                }
-
-                override fun subDesText(): Int {
-                        return R.string.fgh_text_loading
                 }
 
                 override fun colorRes(): Int {
