@@ -1,7 +1,6 @@
-package com.bing.example.videoedit
+package com.bing.example.tools
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,17 +9,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bing.example.R
 import com.bing.example.databinding.ActivityVideoEditBinding
+import com.bing.example.videoedit.OneVideoEditActivity
 import com.bing.mvvmbase.base.BaseViewModel
 import com.bing.mvvmbase.base.recycleview.BaseRecycleViewActivity
 import com.bing.mvvmbase.base.recycleview.BaseRecycleViewAdapter
 import com.bing.mvvmbase.model.datawrapper.Status
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
+import org.jetbrains.anko.startActivity
 
-class VideoEditActivity : BaseRecycleViewActivity<ActivityVideoEditBinding, BaseViewModel, VideoEditAdapter, VideoEditType>() {
+class ToolsActivity : BaseRecycleViewActivity<ActivityVideoEditBinding, BaseViewModel, VideoEditAdapter, VideoEditType>() {
         override val data: LiveData<List<VideoEditType>>
                 get() {
-                        val list = listOf(VideoEditType("jianqie"))
+                        val list = listOf(VideoEditType("shipinbianji"))
                         val temp = MutableLiveData<List<VideoEditType>>()
                         temp.value = list
                         return temp
@@ -40,7 +41,11 @@ class VideoEditActivity : BaseRecycleViewActivity<ActivityVideoEditBinding, Base
         override fun initAdapter() {
                 mAdapter = VideoEditAdapter(object : BaseRecycleViewAdapter.OnClickListener {
                         override fun onClick(position: Int) {
+                                when (position) {
+                                        0 -> startActivity<OneVideoEditActivity>()
 
+                                        else -> {}
+                                }
                         }
                 })
         }

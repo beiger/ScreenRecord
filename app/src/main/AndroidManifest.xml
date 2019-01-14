@@ -1,64 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.bing.example">
+    package="com.bing.example">
 
-	<uses-permission android:name="android.permission.REORDER_TASKS" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.RECORD_AUDIO" />
-	<uses-permission android:name="android.permission.ACTION_OPEN_DOCUMENT" />
-	<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- <uses-permission android:name="android.permission.GET_TASKS" /> -->
-	<uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACTION_OPEN_DOCUMENT" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- <uses-permission android:name="android.permission.GET_TASKS" /> -->
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
 
-	<application
-		android:name=".app.ScreenRecordApplication"
-		android:allowBackup="true"
-		android:icon="@mipmap/app_logo"
-		android:label="@string/app_name"
-		android:roundIcon="@mipmap/app_logo"
-		android:supportsRtl="true"
-		android:textAllCaps="false"
-		android:theme="@style/AppTheme">
-		<activity
-			android:name=".main.service.RecordActivity"
-			android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-			android:launchMode="singleInstance"/>
-		<activity
-			android:name=".main.home.MainActivity"
-			android:configChanges="orientation|screenSize|keyboardHidden"
-			android:label="@string/app_name"
-			android:screenOrientation="portrait">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
+    <application
+        android:name=".app.ScreenRecordApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/app_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/app_logo"
+        android:supportsRtl="true"
+        android:textAllCaps="false"
+        android:theme="@style/AppTheme">
+        <activity android:name=".videoedit.OneVideoEditActivity"></activity>
+        <activity
+            android:name=".main.service.RecordActivity"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name=".main.home.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity
-			android:name=".otherdetails.SettingActivity"
-			android:screenOrientation="portrait" />
-		<activity android:name=".otherdetails.AboutActivity" />
-		<activity android:name=".otherdetails.FeedbackActivity" />
-		<activity android:name=".videoedit.VideoEditActivity" />
-		<activity android:name=".search.SearchActivity" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".otherdetails.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".otherdetails.AboutActivity" />
+        <activity android:name=".otherdetails.FeedbackActivity" />
+        <activity android:name=".tools.ToolsActivity" />
+        <activity android:name=".search.SearchActivity" />
 
-		<service
-			android:name=".main.home.floatingview.CustomFloatingViewService"
-			android:exported="false" />
-		<service
-			android:name=".main.service.RecordService"
-			android:enabled="true"
-			android:exported="false"/>
+        <service
+            android:name=".main.home.floatingview.CustomFloatingViewService"
+            android:exported="false" />
+        <service
+            android:name=".main.service.RecordService"
+            android:enabled="true"
+            android:exported="false" />
 
-		<provider
-			android:name="androidx.core.content.FileProvider"
-			android:authorities="com.bing.example.fileprovider"
-			android:exported="false"
-			android:grantUriPermissions="true">
-			<meta-data
-				android:name="android.support.FILE_PROVIDER_PATHS"
-				android:resource="@xml/file_paths" />
-		</provider>
-	</application>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.bing.example.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
 
 </manifest>

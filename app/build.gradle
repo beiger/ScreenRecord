@@ -131,6 +131,9 @@ dependencies {
     implementation 'com.github.recruit-lifestyle:FloatingView:2.4.0' //悬浮球
     implementation 'com.afollestad.material-dialogs:core:2.0.0-rc5' //dialog
     implementation 'com.afollestad.material-dialogs:input:2.0.0-rc5' //dialog
+    implementation 'com.github.Jay-Goo:RangeSeekBar:v2.0.4'
+    compile 'com.beardedhen:androidbootstrap:2.3.1'
+
 
     //图标
     implementation 'com.mikepenz:fontawesome-typeface:5.0.6.0@aar'

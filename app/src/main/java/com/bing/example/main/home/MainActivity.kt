@@ -20,7 +20,7 @@ import com.bing.example.otherdetails.AboutActivity
 import com.bing.example.otherdetails.FeedbackActivity
 import com.bing.example.otherdetails.SettingActivity
 import com.bing.example.search.SearchActivity
-import com.bing.example.videoedit.VideoEditActivity
+import com.bing.example.tools.ToolsActivity
 import com.bing.mvvmbase.base.BaseActivity
 import com.bing.mvvmbase.base.viewpager.BaseFragmentPagerAdapter
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -68,7 +68,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                         .withOnDrawerItemClickListener { _, _, drawerItem ->
                                 when {
                                         drawerItem!!.identifier == 1L -> {
-                                                startActivity<VideoEditActivity>()
+                                                startActivity<ToolsActivity>()
                                         }
                                         drawerItem.identifier == 2L -> {
                                                 val intent = Intent(this@MainActivity, SettingActivity::class.java)

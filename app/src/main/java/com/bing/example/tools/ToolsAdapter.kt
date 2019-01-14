@@ -1,4 +1,4 @@
-package com.bing.example.videoedit
+package com.bing.example.tools
 
 import android.view.ViewGroup
 import com.bing.example.R
@@ -14,7 +14,7 @@ class VideoEditAdapter(listenerTemp: OnClickListener): BaseRecycleViewAdapter<Vi
         override fun bindData(holder: VideoEditViewHolder, position: Int) {
                 val binding = holder.binding
                 when (data!![position].name) {
-                        "jianqie" -> {
+                        "shipinbianji" -> {
                                 binding.tvEdit.text = binding.root.context.getText(R.string.jianqie)
                                 binding.ivEdit.setImageResource(R.drawable.ic_jianqie)
                         }
